@@ -16,7 +16,7 @@ Landing-side med oversikt over oppskrifter.
 ### Hvordan demonstrere
 Jeg kan scrolle meg gjennom en side og se på oppskrifter.
 
-## Brukerhistorie 2
+## Brukerhistorie 3
 ### Persistent lagring (backend) (4p)
 Som bruker ønsker jeg å kunne finne igjen oppskrifter når jeg bruker appen neste gang.
 ### Notater
