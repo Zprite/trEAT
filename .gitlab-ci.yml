@@ -6,6 +6,7 @@ stages:          # List of stages for jobs, and their order of execution
 eslint:   # This job runs in the test stage.
   stage: test
   script:
+    - cd frontend
     - npm i eslint
     - npm -g i eslint-cli
     - eslint "src/**"
