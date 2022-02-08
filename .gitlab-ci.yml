@@ -7,4 +7,5 @@ eslint:   # This job runs in the test stage.
   stage: test
   script:
     - npm i eslint
+    - npm -g i eslint-cli
     - eslint "src/**"
