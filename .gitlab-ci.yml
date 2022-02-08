@@ -1,0 +1,7 @@
+stages:          # List of stages for jobs, and their order of execution
+  - test
+
+lint-test-job:   # This job runs in the test stage.
+  stage: test
+  script:
+    - echo "Linting code... This will take about 10 seconds."
