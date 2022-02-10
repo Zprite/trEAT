@@ -10,8 +10,3 @@ frontend-eslint:   # This job runs in the test stage.
     - npm i eslint
     - npm -g i eslint-cli
     - eslint --ext js,jsx src
-
-backend-eslint:
-  stage: test
-  script:
-    - cd backend
