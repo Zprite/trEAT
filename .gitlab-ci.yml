@@ -3,10 +3,15 @@ image: node
 stages:          # List of stages for jobs, and their order of execution
   - test
 
-eslint:   # This job runs in the test stage.
+frontend-eslint:   # This job runs in the test stage.
   stage: test
   script:
     - cd frontend
     - npm i eslint
     - npm -g i eslint-cli
     - eslint --ext js,jsx src
+
+backend-eslint:
+  stage: test
+  script:
+    - cd backend
