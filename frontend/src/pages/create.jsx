@@ -4,6 +4,7 @@ import RecipeImageInput from '../components/RecipeImageInput';
 import RecipeTitleInput from '../components/RecipeTitleInput';
 import RecipeTimeInput from '../components/RecipeTimeInput';
 import '../styles/globals.css';
+import styles from '../styles/create.module.css';
 import RecipeDescriptionInput from '../components/RecipeDescriptionInput';
 import RecipeIngredientsInput from '../components/RecipeIngredientsInput';
 import RecipeStepsMarkdown from '../components/RecipeStepsMarkdown';
@@ -14,7 +15,7 @@ export default function Create() {
       <Header title="Create recipe" />
       <div className="recipeCreator">
         <RecipeImageInput />
-        <div className="timeTitleContainer">
+        <div className={styles.timeTitleContainer}>
           <RecipeTitleInput />
           <RecipeTimeInput />
         </div>
