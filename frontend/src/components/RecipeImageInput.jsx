@@ -13,13 +13,13 @@ export default function RecipeImageInput() {
   }, [image]);
 
   function onImageChange(e) {
-    setImage([...e.target.files]);
+    setImage([...e.target.files[0]]);
   }
 
   return (
     <div className={styles.imageInputContainter}>
       <input type="file" accept="image/*" onChange={onImageChange} />
-      <img src={imageURL} alt="uploaded" />
+      <img className={styles.recipeImage} src={imageURL} alt="" />
     </div>
   );
 }
