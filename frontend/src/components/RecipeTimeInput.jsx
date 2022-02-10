@@ -3,6 +3,6 @@ import styles from '../styles/RecipeTimeInput.module.css';
 
 export default function RecipeTimeInput() {
   return (
-    <div className={styles.timeInput} />
+    <div className={styles.timeInput}>RecipeTimeInput </div>
   );
 }
