@@ -1,0 +1,12 @@
+.RecipeDescriptionInput{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    background-color: #fff;
+    align-items: center;
+    padding-bottom: 24px;
+}
+textarea{
+    max-width: 80%;
+}

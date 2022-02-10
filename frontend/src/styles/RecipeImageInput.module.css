@@ -1,6 +1,5 @@
 .imageInputContainter{
-    min-width:300px;
-    min-height: 100px;
+    min-height: 200px;
     background-color: #fff;
     display: flex;
     justify-content: center;
