@@ -6,6 +6,11 @@ export default function RecipeImageInput() {
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
 
+  const resetImage = () => {
+    setImages([]);
+    setImageURLs([]);
+  };
+
   useEffect(() => {
     if (images.length < 1) return;
     const newImageUrls = [];
@@ -15,6 +20,13 @@ export default function RecipeImageInput() {
 
   function onImageChange(e) {
     setImages([...e.target.files]);
+  }
+
+  function deleteButton() {
+    if (images.length >= 1) {
+      return <button className={styles.deleteImageButton} type="button" onClick={resetImage}>Remove image</button>;
+    }
+    return null;
   }
 
   return (
@@ -35,7 +47,7 @@ export default function RecipeImageInput() {
         </label>
         <input className={styles.imageInput} type="file" name="file" id="file" accept="image/*" onChange={onImageChange} />
       </div>
-      <button className={styles.deleteImageButton} type="button">Remove image</button>
+      {deleteButton()}
     </div>
   );
 }
