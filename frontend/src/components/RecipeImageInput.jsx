@@ -18,15 +18,24 @@ export default function RecipeImageInput() {
   }
 
   return (
-    <div className={styles.imageInputContainter}>
-      <label htmlFor="file">
-        <div className={styles.labelInner}>
-          <div className={styles.plusButton}>+</div>
-          <div className={styles.addImageLabelText}><div>Add image...</div></div>
-        </div>
-      </label>
-      <input className={styles.imageInput} type="file" name="file" id="file" accept="image/*" onChange={onImageChange} />
-      <img className={styles.recipeImage} src={imageURLs[0]} alt="" />
+    <div>
+      <div className={styles.imageInputContainter}>
+        <label htmlFor="file">
+          <div
+            className={styles.labelInner}
+            style={{
+              backgroundImage: `url(${imageURLs[0]})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+            }}
+          >
+            <div className={styles.plusButton}>+</div>
+            <div className={styles.addImageLabelText}><div>Add image...</div></div>
+          </div>
+        </label>
+        <input className={styles.imageInput} type="file" name="file" id="file" accept="image/*" onChange={onImageChange} />
+      </div>
+      <button className={styles.deleteImageButton} type="button">Remove image</button>
     </div>
   );
 }
