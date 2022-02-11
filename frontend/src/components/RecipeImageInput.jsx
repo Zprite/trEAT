@@ -2,24 +2,24 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/RecipeImageInput.module.css';
 
 export default function RecipeImageInput() {
-  const [image, setImage] = useState();
-  const [imageURL, setImageURL] = useState();
+  const [images, setImages] = useState([]);
+  const [imageURLs, setImageURLs] = useState([]);
 
   useEffect(() => {
-    if (image == null) return;
-    const newImageURL = null;
-    newImageURL.push(URL.createObjectURL(image));
-    setImageURL(newImageURL);
-  }, [image]);
+    if (images.length < 1) return;
+    const newImageUrls = [];
+    images.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
+    setImageURLs(newImageUrls);
+  }, [images]);
 
   function onImageChange(e) {
-    setImage([...e.target.files[0]]);
+    setImages([...e.target.files]);
   }
 
   return (
     <div className={styles.imageInputContainter}>
       <input type="file" accept="image/*" onChange={onImageChange} />
-      <img className={styles.recipeImage} src={imageURL} alt="" />
+      <img className={styles.recipeImage} src={imageURLs[0]} alt="" />
     </div>
   );
 }
