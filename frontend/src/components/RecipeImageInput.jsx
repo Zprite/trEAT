@@ -40,8 +40,8 @@ export default function RecipeImageInput() {
             backgroundSize: 'cover',
           }}
         >
-          <div className={styles.plusButton}>+</div>
-          <div className={styles.addImageLabelText}><div>Add image...</div></div>
+          <div className={styles.plusButton}>{images.length < 1 ? '+' : '' }</div>
+          <div className={styles.addImageLabelText}><div>{images.length < 1 ? 'Add Image...' : ''}</div></div>
         </div>
       </label>
       <input className={styles.imageInput} type="file" name="file" id="file" accept="image/*" onChange={onImageChange} />
