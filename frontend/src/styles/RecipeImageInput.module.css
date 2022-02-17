@@ -24,7 +24,7 @@
 .labelInner{
     background-color: #fff;
     height: auto;
-    width: 600px;
+    width: 500px;
     height: 300px;
     display: flex;
     flex-direction: column;
@@ -59,4 +59,19 @@
 
 .deleteImageButton{
     margin-top: 8px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .labelInner{
+        width: 400px;
+        height: 230px;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .labelInner{
+        width: 300px;
+        height: 150px;
+    }
 }

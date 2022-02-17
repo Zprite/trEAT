@@ -1,11 +1,19 @@
 import React from 'react';
+import MDEditor from '@uiw/react-md-editor';
 import styles from '../styles/RecipeStepsMarkdown.module.css';
 
 export default function RecipeStepsMarkdown() {
+  const [value, setValue] = React.useState('# Recipe!');
   return (
     <div className={styles.RecipeStepsMarkdown}>
       <h2>Recipe Steps</h2>
-      <textarea id="descTextArea" name="descTextArea" rows="4" cols="50" placeholder="Write detailed steps for the recipe..." />
+      <MDEditor height={200} value={value} onChange={setValue} preview="edit" />
+      <div className={styles.previewContainer}>
+        <MDEditor.Markdown
+          source={value}
+          linkTarget="_blank"
+        />
+      </div>
     </div>
   );
 }
