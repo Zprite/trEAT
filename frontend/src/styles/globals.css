@@ -8,7 +8,7 @@ div{
 }
 
 .centeredPageWrapper{
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@ div{
 }
 
 .recipeCreator{
-    width: 90%;
+    width: 75%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -30,9 +30,27 @@ div{
     width: 100%;
     margin-top: 24px;
 }
-@media only screen and (max-width: 600px) {
+
+.w-md-editor{
+    width: 95%;
+}
+.w-md-editor-input{
+    width: 100% !important;
+}
+
+
+@media only screen and (max-width: 900px) {
     .centeredPageWrapper{
         width: 98%;
-        padding: 8px;
+        padding: 2px;
+        margin: 0px;
+    }
+
+    .w-md-editor-toolbar{
+    height: 48px !important;
+    }
+
+    .recipeCreator{
+        width: 95%;
     }
 }
