@@ -14,10 +14,12 @@ export default function RecipeIngredientsInput() {
   };
 
   function handleAdd() {
-    setIngredientId(ingredientId + 1);
-    const newIngredients = ingredients.concat({ description, id: ingredientId });
-    setIngredients(newIngredients);
-    setDescription('');
+    if (description !== '') {
+      setIngredientId(ingredientId + 1);
+      const newIngredients = ingredients.concat({ description, id: ingredientId });
+      setIngredients(newIngredients);
+      setDescription('');
+    }
   }
 
   function handleChange(event) {
@@ -30,18 +32,18 @@ export default function RecipeIngredientsInput() {
 
   return (
     <div className={styles.RecipeIngredientsInput}>
-      <h2>Ingredients</h2>
-      <ul id="recipeList">
+      <h2 className={styles.ingredientTitle}>Ingredients</h2>
+      <ul id="recipeList" className={styles.recipeList}>
         {ingredients.map((ingredient) => (
-          <li key={ingredient.id}>
-            <button type="button" id={ingredient.id} onClick={removeIngredient}>-</button>
+          <li className={styles.ingredientList} key={ingredient.id}>
+            <button type="button" className={styles.deleteButton} id={ingredient.id} onClick={removeIngredient}>-</button>
             {ingredient.description}
           </li>
         ))}
       </ul>
-      <div className={styles.addEntryContainer}>
-        <button type="button" onClick={handleAdd}>+</button>
-        <input type="text" value={description} id="newIngredientSubmission" onChange={handleChange} onKeyPress={handleChange} />
+      <div>
+        <button type="button" className={styles.addButton} onClick={handleAdd}>+</button>
+        <input type="text" value={description} className={styles.entryContainer} id="newIngredientSubmission" onChange={handleChange} onKeyPress={handleChange} />
       </div>
     </div>
   );
