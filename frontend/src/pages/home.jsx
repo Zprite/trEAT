@@ -1,11 +1,8 @@
 import React from 'react';
-import Header from '../components/Header';
+import RecipeView from './recipeView';
 
 export default function Home() {
   return (
-    <>
-      <Header title="Home" />
-      <div>Oppskrifter....</div>
-    </>
+    <RecipeView />
   );
 }

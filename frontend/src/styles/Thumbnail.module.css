@@ -15,24 +15,15 @@
     text-decoration: none;
 }
 
-/* put in character limits for heading */
-h1 {
-    font-size: 2.5em;
-    font-weight: 400;
-    margin: 0 0 0.4em 0;
-    color: #487d6b;
-} 
-
-
-img {
-    border-radius: 3% ;
+.thumbnailImage{
     width: 100%;
     height: 15rem;
-    object-fit: cover;
+    border-radius: 3% ;
+
 }
 
 .tinyFacts {
-    color: #487d6b;
+    color: #008f67;;
     font-size: 1.5rem;
     font-weight: 300;
     margin: 0.3rem 0rem;
@@ -51,12 +42,6 @@ img {
     display: inline-block;
 }
 
-/* put in character limits for paragraph */
-p {
-    margin: 0.8rem 0.8rem 1.8rem 0.8rem;
-    font-size: 1.15rem;
-    color: #3b3b45;
-}
  #clock, #star {
     position:relative;
     top: 3px;

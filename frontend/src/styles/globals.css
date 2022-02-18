@@ -3,8 +3,27 @@
     box-sizing: border-box;
 }
 
-div{
+div, img{
     border-radius: 8px;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 400;
+    margin: 0 0 0.4em 0;
+    color: #008f67;
+    overflow: hidden;
+} 
+
+p {
+    margin: 0.8rem 0.8rem 1.8rem 0.8rem;
+    font-size: 1.15rem;
+    color: #3b3b45;
+    overflow: hidden;
+}
+
+img {
+    object-fit: cover;
 }
 
 .centeredPageWrapper{
@@ -17,6 +36,15 @@ div{
     padding: 24px;
 }
 
+.recipePageWrapper{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #E9E9E9;
+    padding: 24px;
+}
 .recipeCreator{
     width: 75%;
     margin: 0 auto;
@@ -43,6 +71,10 @@ div{
     .centeredPageWrapper{
         width: 98%;
         padding: 2px;
+        margin: 0px;
+    }
+    .recipePageWrapper{
+        width: 99%;
         margin: 0px;
     }
 

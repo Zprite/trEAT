@@ -17,7 +17,7 @@ export default function Thumbnail({
         <div id="heading">
           <h1>{title}</h1>
         </div>
-        <img src={picture} alt="" />
+        <img className={styles.thumbnailImage} src={picture} alt="" />
         <div className={styles.tinyFacts}>
           <div>
             <div id="clock"><FaRegClock /></div>
