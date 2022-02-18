@@ -1,0 +1,9 @@
+.ingredientsList{
+    padding-left: 18px;
+    list-style: inside;
+}
+
+.ingredientsList > li {
+    font-size: 1.15rem;
+    font-weight: 200;
+}

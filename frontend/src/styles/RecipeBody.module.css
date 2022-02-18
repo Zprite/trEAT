@@ -1,0 +1,65 @@
+.recipeBodyContainer{
+    width: 65%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.ingredientsContainer{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+}
+
+.ingredientsContainer > h2 {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.ingredientsContainer > hr {
+    width: 90%;
+    color: rgb(235, 235, 235);
+
+}
+
+.recipeDescription{
+    width: 90%;
+}
+
+.timeEstimateOuter{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeEstimateOuter > hr {
+    width: 100%;
+}
+
+.timeEstimateContainer{
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+}
+
+.timeEstimateText{
+    padding-left: 12px;
+    font-weight: lighter;
+}
+
+.recipeMarkdown{
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
