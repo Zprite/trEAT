@@ -9,11 +9,12 @@ export default function Thumbnail({
   picture,
   duration,
   rating,
-  description, // 150 characters?
+  description,
+  link, // 150 characters?
 }) {
   return (
     <div className={styles.box}>
-      <Link className={styles.link} to="/">
+      <Link className={styles.link} to={link}>
         <div id="heading">
           <h1>{title}</h1>
         </div>
