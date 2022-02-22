@@ -5,6 +5,65 @@
     background-color: #008f67;;
     color: #e3e3da;
     font-size: 2em;
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 0 0 1rem;
     justify-content: space-between;
+    border-radius: 0;
+}
+
+.logoButton {
+
+    background-color: inherit;
+    border-color: black;
+    margin: 0 0 1rem 0;
+    height: 100%;
+    text-decoration: none;
+}
+
+
+.searchButton {
+    background-color: #6BAF92;
+    height: 100%;
+    width: 3.5rem;
+    border: 2px solid #e3e3da;
+    border-top: none;
+    border-bottom: none;
+    box-sizing: content-box;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.searchButton div, .profileButton div, .createButton div{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createButton{
+    background-color: #8DC3A7;
+    height: 100%;
+    width: 3.5rem;
+    border: none;
+    box-sizing: content-box;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.profileButton{
+    background-color: #B4D6C1;
+    height: 100%;
+    width: 3.5rem;
+    border: 2px solid #e3e3da;
+    border-top: none;
+    border-bottom: none;
+    box-sizing: content-box;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.userIcon, .plusIcon, .searchIcon{
+    color: white;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
 }

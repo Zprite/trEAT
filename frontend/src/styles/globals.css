@@ -66,11 +66,15 @@ img {
     width: 100% !important;
 }
 
+body {
+    margin: 0;
+}
+
 
 @media only screen and (max-width: 900px) {
     .centeredPageWrapper{
-        width: 98%;
-        padding: 2px;
+        width: 100%;
+        padding: 0px;
         margin: 0px;
     }
     .recipePageWrapper{

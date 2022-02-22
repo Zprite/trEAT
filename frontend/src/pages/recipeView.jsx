@@ -18,7 +18,7 @@ export default function RecipeView() {
   ));
 
   return (
-    <div id="page">
+    <div className={styles.pageContainer}>
       <NavBar />
       <div className={styles.outerContainer}>
         <div className={styles.recipeContainer}>

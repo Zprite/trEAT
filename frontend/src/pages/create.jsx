@@ -8,10 +8,12 @@ import styles from '../styles/create.module.css';
 import RecipeDescriptionInput from '../components/RecipeDescriptionInput';
 import RecipeIngredientsInput from '../components/RecipeIngredientsInput';
 import RecipeStepsMarkdown from '../components/RecipeStepsMarkdown';
+import NavBar from '../components/NavBar';
 
 export default function Create() {
   return (
     <div className="centeredPageWrapper">
+      <NavBar />
       <Header title="Create recipe" />
       <div className="recipeCreator">
         <RecipeImageInput />
