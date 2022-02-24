@@ -1,3 +1,44 @@
-.recipeContainer{
-
+.profileWrapper {
+    background-color: #f7f7f4;
 }
+
+
+
+.profileWrapper h2{
+    margin: 2rem 2rem 1.5rem 2rem;
+    border-bottom: 2px solid rgb(116, 112, 112);
+    color: rgb(116, 112, 112);
+    padding: 1rem;
+    font-size: 2rem;
+    font-weight: 500;
+    
+}
+
+
+.outerContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #f7f7f4;
+}
+
+.recipeContainer {
+    background-color: #f7f7f4;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0.6rem 0.8rem;
+}
+
+/* Small devices (landsscape phones) standard */
+/* Medium devices (tablets) */
+@media (min-width: 650px) {
+    .recipeContainer {        
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: flex-start;
+        max-width: 1600px;
+    }
+}
+/* Large divices (large desktops) */

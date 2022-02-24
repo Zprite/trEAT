@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaRegClock, FaStar } from 'react-icons/fa';
+import { FaRegClock, FaStar, FaRegEdit } from 'react-icons/fa';
 import styles from '../styles/Thumbnail.module.css';
 
 export default function Thumbnail({
@@ -30,6 +30,9 @@ export default function Thumbnail({
           </div>
         </div>
         <p id="rating">{description}</p>
+        <div className={styles.editIcon}>
+          <FaRegEdit />
+        </div>
       </Link>
     </div>
   );

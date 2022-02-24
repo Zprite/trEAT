@@ -46,6 +46,11 @@
     top: 3px;
 }
 
+.editIcon {
+    font-size: 3rem;
+    color: #008f67;
+}
+
 /* Small devices (landsscape phones) standard */
 /* Medium devices (tablets) */
 @media (min-width: 650px) {
