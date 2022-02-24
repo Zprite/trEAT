@@ -23,7 +23,9 @@ router.route('/recipes').post(async (req, res) => {
         title: body.title,
         description: body.description,
         duration: body.duration,
-        ingredients: body.ingredients
+        stepsMarkdown: body.stepsMarkdown,
+        ingredients: body.ingredients,
+        imagePath: body.imagePath
     });
 
     const saveRes = await recipe.save()
@@ -64,7 +66,6 @@ router.route('/recipe/:id').get(async (req, res) => {
     res.send({data: getRes})
 })
 
-// create a new recipe
 router.route('/recipe/:id').delete(async (req, res) => {
     const { params } = req
     let saveRes;

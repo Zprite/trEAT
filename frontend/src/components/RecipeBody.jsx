@@ -44,7 +44,7 @@ export default function RecipeBody({ recipeObject }) {
       <h1 id="recipeTitle">
         {dishTitle}
       </h1>
-      <p id="recipeDesc" className={styles.recipeDescription}>
+      <p className={styles.recipeDescription}>
         {descriptionText}
       </p>
       {renderIngredients()}
