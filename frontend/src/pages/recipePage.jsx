@@ -5,7 +5,7 @@ import '../styles/globals.css';
 import styles from '../styles/recipePage.module.css';
 import recipes from '../data/recipes';
 
-export default function recipePage() {
+export default function RecipePage() {
   const recipe = recipes[0];
   return (
     <div className="recipePageWrapper">
