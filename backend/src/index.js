@@ -2,18 +2,40 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import path from'path'
-import mongoose from 'mongoose'
 import router from './routes.js'
 import multer from "multer"
+import cookieParser from 'cookie-parser'
+import dotenv from 'dotenv'
+import connectToDB from "./utils/connectdb.js"
 
 const app = express()
 const PORT = 8000
-
+dotenv.config()
 
 // handle json
 app.use(bodyParser.json({ extended: true }))
+app.use(cookieParser(process.env.COOKIE_SECRET))
 
-var storage = multer.diskStorage({
+//Add the client URL to the CORS policy
+const whitelist = process.env.WHITELISTED_DOMAINS
+  ? process.env.WHITELISTED_DOMAINS.split(",")
+  : []
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
+  credentials: true,
+}
+
+app.use(cors(corsOptions));
+
+// Multer storage for image-uploads.
+const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, '../public/uploads')
     },
@@ -21,12 +43,9 @@ var storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 });
-
 //will be using this for uplading
 const upload = multer({ storage: storage });
 
-// origins should be spesified in prod
-app.use(cors());
 app.use(router);
 app.use('/public', express.static(path.join(path.resolve(), '../public')))
 //app.use('/ftp', express.static('public'), serveIndex('public', {'icons': true})); 
@@ -41,13 +60,6 @@ app.post('/imageUpload', upload.single('file'), function(req,res) {
     return res.send(imagePath);
 })
 
-// Connect to mongodb
-mongoose
-    .connect(
-        "mongodb+srv://henrikskog:JYN*yvn1dyk7anx*jmy@cluster0.ycj8k.mongodb.net/Cluster0?retryWrites=true&w=majority",
-        { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}
-    )
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.log(err));
+connectToDB();
 
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}...`))
+const server = app.listen(PORT, () => console.log(`Example app listening on port ${PORT}...`))
