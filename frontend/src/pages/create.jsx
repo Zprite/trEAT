@@ -12,21 +12,23 @@ import NavBar from '../components/NavBar';
 
 export default function Create() {
   return (
-    <div className="centeredPageWrapper">
+    <div>
       <NavBar />
-      <Header title="Create recipe" />
-      <div className="recipeCreator">
-        <RecipeImageInput />
-        <div className={styles.timeTitleContainer}>
-          <RecipeTitleInput />
-          <RecipeTimeInput />
-        </div>
-        <RecipeDescriptionInput />
-        <RecipeIngredientsInput />
-        <RecipeStepsMarkdown />
+      <div className="centeredPageWrapper">
+        <Header title="Create recipe" />
+        <div className="recipeCreator">
+          <RecipeImageInput />
+          <div className={styles.timeTitleContainer}>
+            <RecipeTitleInput />
+            <RecipeTimeInput />
+          </div>
+          <RecipeDescriptionInput />
+          <RecipeIngredientsInput />
+          <RecipeStepsMarkdown />
 
+        </div>
+        <div>Ekstra innhold på siden</div>
       </div>
-      <div>Ekstra innhold på siden</div>
     </div>
   );
 }

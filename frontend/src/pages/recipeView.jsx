@@ -18,12 +18,14 @@ export default function RecipeView() {
   ));
 
   return (
-    <div className={styles.pageContainer}>
+    <div>
       <NavBar />
-      <div className={styles.outerContainer}>
-        <div className={styles.recipeContainer}>
-          <SearchBar />
-          {recipeCards}
+      <div className={styles.pageContainer}>
+        <div className={styles.outerContainer}>
+          <div className={styles.recipeContainer}>
+            <SearchBar />
+            {recipeCards}
+          </div>
         </div>
       </div>
     </div>
