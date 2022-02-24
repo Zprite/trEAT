@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/RecipeImageInput.module.css';
 
-export default function RecipeImageInput() {
+export default function RecipeImageInput({ passData }) {
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
 
@@ -12,6 +12,7 @@ export default function RecipeImageInput() {
   };
 
   useEffect(() => {
+    passData(images[0]);
     if (images.length < 1) return;
     const newImageUrls = [];
     images.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));

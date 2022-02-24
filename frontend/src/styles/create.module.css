@@ -5,8 +5,42 @@
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
+    margin-top: 12px;
 }
 
+.errorMessgeContainer{
+    display: block;
+    margin-top: 8px !important;
+}
+
+.errorMessgeContainer > div{
+    margin: 0 auto;
+    padding-top: 8px;
+}
+
+.errorMessage{
+    text-align: center;
+    color: red;
+    max-width: 450px;
+}
+
+.submitButton{
+    height: 64px;
+    width: 300px;
+    font-size: 1.2rem;
+    padding: 12px;
+    margin-top: 24px;
+    margin-bottom: 32px;
+    transition: 0.1s ease-in-out;
+}
+
+.submitButton:hover{ 
+    background-color: rgb(243, 243, 243);
+    border: 2px solid rgb(148, 148, 148);
+    font-size: 1.4rem;
+    border-radius: 3PX;
+    cursor: pointer;
+}
 
 
 @media only screen and (max-width: 600px) {
