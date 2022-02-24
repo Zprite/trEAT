@@ -1,8 +1,28 @@
 import { userSchema } from '../models.js'
 import express from 'express'
 import { getToken, COOKIE_OPTIONS, getRefreshToken } from "../authenticate.js"
+import passport from "passport";
 
 const router = express.Router();
+
+router.post("/login", passport.authenticate('local'), (req, res, next) => {
+  const token = getToken({ _id: req.user._id })
+  const refreshToken = getRefreshToken({ _id: req.user._id })
+  userSchema.findById(req.user._id).then(
+    user => {
+      user.refreshToken.push({ refreshToken })
+      user.save((err, user) => {
+        if (err) {
+          res.statusCode = 500
+          res.send(err)
+        } else {
+          res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
+          res.send({ success: true, token })
+        }
+      })
+    }
+  )
+})
 
 router.post("/signup", (req, res, next) => {
   // Verify that first name is not empty

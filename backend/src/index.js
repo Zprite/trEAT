@@ -17,7 +17,10 @@ import imageRouter from "./routes/fileUploadRoutes.js"
 // Strategies
 import jwtStrategy from "./strategies/JwtStrategy.js"
 import localStrategy from "./strategies/LocalStrategy.js"
-import { COOKIE_OPTIONS, getToken, getRefreshToken, verifyUser } from "./authenticate.js"
+
+// Call to setup passport strategies
+jwtStrategy()
+localStrategy()
 
 // handle json
 app.use(bodyParser.json({ extended: true }))
