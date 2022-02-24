@@ -8,7 +8,7 @@ export default function RecipeBody({ recipeObject }) {
   const dishTitle = recipeObject.title;
   const descriptionText = recipeObject.description;
   const durationTime = recipeObject.duration;
-  const markdownSource = recipeObject.markdown;
+  const markdownSource = recipeObject.stepsMarkdown;
 
   const [dimensions, setDimensions] = React.useState({
     height: window.innerHeight,

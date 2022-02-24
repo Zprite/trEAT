@@ -30,10 +30,14 @@ export default function Thumbnail({
           </div>
         </div>
         <p id="rating">{description}</p>
-        <div className={styles.editIcon}>
-          <FaRegEdit />
-        </div>
       </Link>
+      <div className={styles.linkBox}>
+        <Link className={styles.editLink} to="/create">
+          <div className={styles.editIcon}>
+            <FaRegEdit />
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }
