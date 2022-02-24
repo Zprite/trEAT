@@ -28,6 +28,17 @@ const User = new Schema({
     },
 })
 
+
+//Remove refreshToken from the response
+User.set("toJSON", {
+    transform: function (doc, ret, options) {
+        delete ret.refreshToken
+        return ret
+    },
+})
+
+User.plugin(passportLocalMongoose)
+
 const recipeSchema = new Schema({
     title: String,
     imagePath: String,
