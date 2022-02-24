@@ -1,16 +1,23 @@
 import express from 'express'
+import 'dotenv/config'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import path from 'path'
-import router from './routes.js'
-import multer from "multer"
 import cookieParser from 'cookie-parser'
-import dotenv from 'dotenv'
 import connectToDB from "./utils/connectdb.js"
+import passport from "passport"
 
 const app = express()
-const PORT = 8000
-dotenv.config()
+
+// Routers
+import userRouter from "./routes/userRoutes.js"
+import recipeRouter from "./routes/recipeRoutes.js"
+import imageRouter from "./routes/fileUploadRoutes.js"
+
+// Strategies
+import jwtStrategy from "./strategies/JwtStrategy.js"
+import localStrategy from "./strategies/LocalStrategy.js"
+import { COOKIE_OPTIONS, getToken, getRefreshToken, verifyUser } from "./authenticate.js"
 
 // handle json
 app.use(bodyParser.json({ extended: true }))
@@ -32,34 +39,21 @@ const corsOptions = {
     credentials: true,
 }
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions))
 
-// Multer storage for image-uploads.
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '../public/uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-    }
-});
-//will be using this for uplading
-const upload = multer({ storage: storage });
-
-app.use(router);
+// Set public folder, mainly for image uploads
 app.use('/public', express.static(path.join(path.resolve(), '../public')))
-//app.use('/ftp', express.static('public'), serveIndex('public', {'icons': true})); 
+
+app.use(passport.initialize())
+
+app.use("/users", userRouter)
+app.use("/", imageRouter)
+app.use("/", recipeRouter)
 
 app.get('/', function (req, res) {
     return res.send("hello from my app express server!")
 })
 
-app.post('/imageUpload', upload.single('file'), function (req, res) {
-    const imagePath = "http://" + req.hostname + ":" + PORT + "/" + req.file.path;
-    console.log('storage location of file upload: ', imagePath);
-    return res.send(imagePath);
-})
-
 connectToDB();
 
-const server = app.listen(PORT, () => console.log(`Example app listening on port ${PORT}...`))
+const server = app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}...`))

@@ -11,6 +11,10 @@ const Session = new Schema({
 })
 
 const User = new Schema({
+    fullName: {
+        type: String,
+        default: "",
+    },
     username: {
         type: String,
         default: "",
@@ -27,7 +31,6 @@ const User = new Schema({
         type: [Session],
     },
 })
-
 
 //Remove refreshToken from the response
 User.set("toJSON", {
@@ -54,5 +57,5 @@ const recipeSchema = new Schema({
 )
 
 // create a model with studentSchema
-const Recipe = mongoose.model('Recipe', recipeSchema);
-export { Recipe };
+export const Recipe = mongoose.model('Recipe', recipeSchema);
+export const userSchema = mongoose.model("User", User);

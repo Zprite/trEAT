@@ -1,10 +1,14 @@
 import passport from "passport"
 import passportLocal from "passport-local"
-import User from "../models.js"
+import { userSchema } from "../models.js"
 
-const LocalStrategy = passportLocal.Strategy;
+const localStrategy = () => {
+    const LocalStrategy = passportLocal.Strategy;
 
-//Called during login/sign up.
-passport.use(new LocalStrategy(User.authenticate()))
-//called while after logging in / signing up to set user details in req.user
-passport.serializeUser(User.serializeUser())
+    //Called during login/sign up.
+    passport.use(new LocalStrategy(userSchema.authenticate()))
+    //called while after logging in / signing up to set user details in req.user
+    passport.serializeUser(userSchema.serializeUser())
+}
+
+export default localStrategy;
