@@ -6,7 +6,8 @@ import jwt from "jsonwebtoken"
 
 const router = express.Router();
 
-// Get user credentials. Checks validity using verifyUser
+// Get user credentials. 
+// Checks validity using verifyUser using JwtStrategy (gets JWT from bearer-token header) 
 router.get("/me", verifyUser, (req, res, next) => {
   res.send(req.user)
 })
