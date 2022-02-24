@@ -1,7 +1,49 @@
-import {Recipe} from './models.js'
+import { Recipe, User } from './models.js'
 import express from 'express'
 
 const router = express.Router();
+
+// get list of all users
+router.route('/users').get(async (req, res) => {
+    User.find().populate("recipes").then(users => {
+        res.send(users)
+    }).catch(err => {
+        res.send("there was an aerror")
+    })
+})
+
+// get user
+router.route('/user/:id').get(async (req, res) => {
+    const { params } = req
+    let getRes;
+
+    if (!(req.params.id)) {
+        getRes = { error: "Badly formatted ID" };
+        res.status(400);
+    }
+
+    else if (!(typeof params.id == "string")) {
+        getRes = { error: "ID is not of type string" };
+        res.status(400);
+    }
+
+    else if (!(req.params.id.length == 24)) {
+        getRes = { error: "ID is of wrong length" };
+        res.status(400);
+    }
+    else {
+        getRes = await User.findOne({ _id: params.id }).populate('recipes')
+        if (getRes == null) {
+            getRes = { error: "Recipe not found" }
+            res.status(204);
+        }
+        else {
+            res.status(200);
+        }
+    }
+    res.send({ data: getRes })
+})
+
 
 // get list of all recipes
 router.route('/recipes').get((req, res) => {
@@ -42,28 +84,28 @@ router.route('/recipe/:id').get(async (req, res) => {
         res.status(400);
     }
 
-    else if(!(typeof params.id == "string")) {
+    else if (!(typeof params.id == "string")) {
         console.log(typeof params.id);
         console.log(params.id);
-        getRes = {error: "ID is not of type string"};
+        getRes = { error: "ID is not of type string" };
         res.status(400);
     }
 
-    else if(!(req.params.id.length == 24)) {
-        getRes = {error: "ID is of wrong length"};
+    else if (!(req.params.id.length == 24)) {
+        getRes = { error: "ID is of wrong length" };
         res.status(400);
     }
     else {
         getRes = await Recipe.findOne({ _id: params.id })
-        if(getRes == null) {
-            getRes = {error: "Recipe not found"}
+        if (getRes == null) {
+            getRes = { error: "Recipe not found" }
             res.status(204);
         }
-        else{
+        else {
             res.status(200);
         }
     }
-    res.send({data: getRes})
+    res.send({ data: getRes })
 })
 
 router.route('/recipe/:id').delete(async (req, res) => {
@@ -71,17 +113,17 @@ router.route('/recipe/:id').delete(async (req, res) => {
     let saveRes;
 
     if (!req.params.id) {
-        saveRes = { error: "Badly formatted ID"};
+        saveRes = { error: "Badly formatted ID" };
         res.status(400);
     }
 
-    else if(!(typeof params.id == "string")) {
-        saveRes = {error: "ID is not of type string"};
+    else if (!(typeof params.id == "string")) {
+        saveRes = { error: "ID is not of type string" };
         res.status(400);
     }
 
-    else if(!(req.params.id.length == 24)) {
-        saveRes = {error: "ID is of wrong length"};
+    else if (!(req.params.id.length == 24)) {
+        saveRes = { error: "ID is of wrong length" };
         res.status(400);
     }
     else {

@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import path from'path'
+import path from 'path'
 import router from './routes.js'
 import multer from "multer"
 import cookieParser from 'cookie-parser'
@@ -18,18 +18,18 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 
 //Add the client URL to the CORS policy
 const whitelist = process.env.WHITELISTED_DOMAINS
-  ? process.env.WHITELISTED_DOMAINS.split(",")
-  : []
+    ? process.env.WHITELISTED_DOMAINS.split(",")
+    : []
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error("Not allowed by CORS"))
-    }
-  },
-  credentials: true,
+    origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error("Not allowed by CORS"))
+        }
+    },
+    credentials: true,
 }
 
 app.use(cors(corsOptions));
@@ -49,13 +49,13 @@ const upload = multer({ storage: storage });
 app.use(router);
 app.use('/public', express.static(path.join(path.resolve(), '../public')))
 //app.use('/ftp', express.static('public'), serveIndex('public', {'icons': true})); 
- 
-app.get('/', function(req,res) {
+
+app.get('/', function (req, res) {
     return res.send("hello from my app express server!")
 })
 
-app.post('/imageUpload', upload.single('file'), function(req,res) {
-    const imagePath = "http://" + req.hostname + ":" + PORT +"/" + req.file.path;
+app.post('/imageUpload', upload.single('file'), function (req, res) {
+    const imagePath = "http://" + req.hostname + ":" + PORT + "/" + req.file.path;
     console.log('storage location of file upload: ', imagePath);
     return res.send(imagePath);
 })
