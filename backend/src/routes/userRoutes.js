@@ -1,9 +1,70 @@
 import { userSchema } from '../models.js'
 import express from 'express'
-import { getToken, COOKIE_OPTIONS, getRefreshToken } from "../authenticate.js"
-import passport from "passport";
+import { getToken, COOKIE_OPTIONS, getRefreshToken, verifyUser } from "../authenticate.js"
+import passport from "passport"
+import jwt from "jsonwebtoken"
 
 const router = express.Router();
+
+// Get user credentials. Checks validity using verifyUser
+router.get("/me", verifyUser, (req, res, next) => {
+  res.send(req.user)
+})
+
+// We retrieve the refresh token from the signed cookies.
+// We verify the refresh token against the secret used to create the refresh token and extract the payload(which contains the user id) from it.
+// Then we find if the refresh token still exists in the database(in case of logout from all devices, 
+// all the refresh tokens belonging to the user will be deleted and the user will be forced to log in again).
+// If it exists in the database, then we replace it with the newly created refresh token.
+// Similar to login & registration steps, here also we will be setting the refresh token in the response cookie and authentication token(JWT) in the response body
+router.post("/refreshToken", (req, res, next) => {
+  const { signedCookies = {} } = req
+  const { refreshToken } = signedCookies
+  if (refreshToken) {
+    try {
+      const payload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+      const userId = payload._id
+      userSchema.findOne({ _id: userId }).then(
+        user => {
+          if (user) {
+            // Find the refresh token against the user record in database
+            const tokenIndex = user.refreshToken.findIndex(
+              item => item.refreshToken === refreshToken
+            )
+            if (tokenIndex === -1) {
+              res.statusCode = 401
+              res.send("Unauthorized")
+            } else {
+              const token = getToken({ _id: userId })
+              // If the refresh token exists, then create new one and replace it.
+              const newRefreshToken = getRefreshToken({ _id: userId })
+              user.refreshToken[tokenIndex] = { refreshToken: newRefreshToken }
+              user.save((err, user) => {
+                if (err) {
+                  res.statusCode = 500
+                  res.send(err)
+                } else {
+                  res.cookie("refreshToken", newRefreshToken, COOKIE_OPTIONS)
+                  res.send({ success: true, token })
+                }
+              })
+            }
+          } else {
+            res.statusCode = 401
+            res.send("Unauthorized")
+          }
+        },
+        err => next(err)
+      )
+    } catch (err) {
+      res.statusCode = 401
+      res.send("Unauthorized")
+    }
+  } else {
+    res.statusCode = 401
+    res.send("Unauthorized")
+  }
+})
 
 router.post("/login", passport.authenticate('local'), (req, res, next) => {
   const token = getToken({ _id: req.user._id })
