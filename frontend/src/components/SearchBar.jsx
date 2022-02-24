@@ -9,7 +9,7 @@ export default function SearchBar() {
   };
   const completedClass = clicked ? styles.btnClicked : styles.btnUnclicked;
   return (
-    <form className={styles.search} id="search">
+    <form className={styles.search}>
       <div>
         <input
           type="text"

@@ -1,22 +1,21 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import styles from '../styles/IngredientsView.module.css';
 
 export default function IngredientsView({ recipeObject }) {
-  const ingredientsList = recipeObject.ingredients;
   // eslint-disable-next-line max-len
-  const listItems = ingredientsList.map((ingredient) => (
-    <li key={ingredient.id}>
-      {ingredient.amount}
-      {ingredient.unit}
-      {' '}
-      {ingredient.name}
-      {' '}
-
-    </li>
-  ));
   return (
     <ul id="ingredients" className={styles.ingredientsList}>
-      {listItems}
+      {recipeObject.ingredients && recipeObject.ingredients.map((ingredient) => (
+        <li key={ingredient._id}>
+          {ingredient.amount}
+          {ingredient.unit}
+          {' '}
+          {ingredient.name}
+          {' '}
+
+        </li>
+      ))}
     </ul>
   );
 }
