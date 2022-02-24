@@ -12,6 +12,62 @@ router.get("/me", verifyUser, (req, res, next) => {
   res.send(req.user)
 })
 
+router.post("/login", passport.authenticate('local'), (req, res, next) => {
+  const token = getToken({ _id: req.user._id })
+  const refreshToken = getRefreshToken({ _id: req.user._id })
+  userSchema.findById(req.user._id).then(
+    user => {
+      user.refreshToken.push({ refreshToken })
+      user.save((err, user) => {
+        if (err) {
+          res.statusCode = 500
+          res.send(err)
+        } else {
+          res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
+          res.send({ success: true, token })
+        }
+      })
+    }
+  )
+})
+
+router.post("/signup", (req, res, next) => {
+  // Verify that first name is not empty
+  if (!req.body.fullName) {
+    res.statusCode = 500
+    res.send({
+      name: "FullNameError",
+      message: "Full Name is required",
+    })
+  } else {
+    userSchema.register(
+      new userSchema({ username: req.body.username, fullName: req.body.fullName }),
+      req.body.password,
+      (err, user) => {
+        if (err) {
+          console.log(err)
+          res.statusCode = 500
+          res.send(err)
+        } else {
+          user.fullName = req.body.fullName;
+          const token = getToken({ _id: user._id })
+          const refreshToken = getRefreshToken({ _id: user._id })
+          user.refreshToken.push({ refreshToken })
+          user.save((err, user) => {
+            if (err) {
+              res.statusCode = 500
+              res.send(err)
+            } else {
+              res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
+              res.send({ sucess: true, token })
+            }
+          })
+        }
+      }
+    )
+  }
+})
+
 // We retrieve the refresh token from the signed cookies.
 // We verify the refresh token against the secret used to create the refresh token and extract the payload(which contains the user id) from it.
 // Then we find if the refresh token still exists in the database(in case of logout from all devices, 
@@ -67,60 +123,31 @@ router.post("/refreshToken", (req, res, next) => {
   }
 })
 
-router.post("/login", passport.authenticate('local'), (req, res, next) => {
-  const token = getToken({ _id: req.user._id })
-  const refreshToken = getRefreshToken({ _id: req.user._id })
-  userSchema.findById(req.user._id).then(
+router.get("/logout", verifyUser, (req, res, next) => {
+  const { signedCookies = {} } = req
+  const { refreshToken } = signedCookies
+  User.findById(req.user._id).then(
     user => {
-      user.refreshToken.push({ refreshToken })
+      const tokenIndex = user.refreshToken.findIndex(
+        item => item.refreshToken === refreshToken
+      )
+
+      if (tokenIndex !== -1) {
+        user.refreshToken.id(user.refreshToken[tokenIndex]._id).remove()
+      }
+
       user.save((err, user) => {
         if (err) {
           res.statusCode = 500
           res.send(err)
         } else {
-          res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
-          res.send({ success: true, token })
+          res.clearCookie("refreshToken", COOKIE_OPTIONS)
+          res.send({ success: true })
         }
       })
-    }
+    },
+    err => next(err)
   )
-})
-
-router.post("/signup", (req, res, next) => {
-  // Verify that first name is not empty
-  if (!req.body.fullName) {
-    res.statusCode = 500
-    res.send({
-      name: "FullNameError",
-      message: "Full Name is required",
-    })
-  } else {
-    userSchema.register(
-      new userSchema({ username: req.body.username, fullName: req.body.fullName }),
-      req.body.password,
-      (err, user) => {
-        if (err) {
-          console.log(err)
-          res.statusCode = 500
-          res.send(err)
-        } else {
-          user.fullName = req.body.fullName;
-          const token = getToken({ _id: user._id })
-          const refreshToken = getRefreshToken({ _id: user._id })
-          user.refreshToken.push({ refreshToken })
-          user.save((err, user) => {
-            if (err) {
-              res.statusCode = 500
-              res.send(err)
-            } else {
-              res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
-              res.send({ sucess: true, token })
-            }
-          })
-        }
-      }
-    )
-  }
 })
 
 // get list of all users
