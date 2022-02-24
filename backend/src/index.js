@@ -45,7 +45,7 @@ app.post('/imageUpload', upload.single('file'), function(req,res) {
 mongoose
     .connect(
         "mongodb+srv://henrikskog:JYN*yvn1dyk7anx*jmy@cluster0.ycj8k.mongodb.net/Cluster0?retryWrites=true&w=majority",
-        { useNewUrlParser: true, useUnifiedTopology: true }
+        { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}
     )
     .then(() => console.log("MongoDB connected"))
     .catch(err => console.log(err));
