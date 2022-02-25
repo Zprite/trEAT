@@ -1,32 +1,82 @@
-import { Button, FormGroup, InputGroup } from '@blueprintjs/core';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  Button, Callout, FormGroup, InputGroup,
+} from '@blueprintjs/core';
+import React, { useContext, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import { UserContext } from '../context/UserContext';
 
 export default function Register() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [userContext, setUserContext] = useContext(UserContext);
+
   const [fullName, setfullName] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    setError('');
+
+    const genericErrorMessage = 'Something went wrong! Please try again later.';
+
+    axios({
+      method: 'post',
+      url: 'http://localhost:8000/users/signup',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: 'include',
+      data: JSON.stringify({ fullName, username, password }),
+    })
+      .then(async (response) => {
+        console.log(response);
+        setIsSubmitting(false);
+        setUserContext((oldValues) => ({ ...oldValues, token: response.data.token }));
+        navigate('/');
+      })
+      .catch((response) => {
+        console.log(response);
+        if (response.status === 400) {
+          setError('Please fill all the fields correctly!');
+        } else if (response.status === 401) {
+          setError('Invalid email and password combination.');
+        } else if (response.status === 500) {
+          console.log(response);
+
+          const data = response.json();
+
+          if (data.message) setError(data.message || genericErrorMessage);
+        }
+      });
+  };
+
   return (
-    <form className="authForm">
+    <form onSubmit={formSubmitHandler} className="authForm">
       <div className="authFormInner">
         <h2>Register</h2>
-        <FormGroup label="First Name" labelFor="fullName">
+        <FormGroup label="Full Name" labelFor="fullName">
           <InputGroup
             id="fullName"
-            placeholder="First Name"
+            placeholder="Full Name"
             onChange={(e) => setfullName(e.target.value)}
             value={fullName}
           />
         </FormGroup>
-        <FormGroup label="Email" labelFor="email">
+        <FormGroup label="Username" labelFor="username">
           <InputGroup
             className="authInput"
-            id="email"
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            id="username"
+            type="username"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
           />
         </FormGroup>
         <FormGroup label="Password" labelFor="password">
@@ -48,7 +98,15 @@ export default function Register() {
               </div>
             </Link>
           </div>
-          <Button className="formButton" intent="primary" text="Register" fill type="submit" />
+          {error && <Callout intent="danger">{error}</Callout>}
+          <Button
+            className="formButton"
+            intent="primary"
+            disabled={isSubmitting}
+            text={`${isSubmitting ? 'Registering' : 'Register'}`}
+            fill
+            type="submit"
+          />
         </section>
       </div>
     </form>

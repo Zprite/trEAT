@@ -12,6 +12,7 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // eslint-disable-next-line no-unused-vars
   const [userContext, setUserContext] = useContext(UserContext);
 
   const formSubmitHandler = (e) => {
