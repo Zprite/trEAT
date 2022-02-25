@@ -70,6 +70,45 @@ body {
     margin: 0;
 }
 
+.authForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+.authFormInner{
+    padding: 48px 100px ;
+    border: 1px solid #008f67;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formButton{
+    font-size: 1rem;
+    padding: 12px 18px 12px 18px;
+    margin-top: 24px;
+    margin-bottom: 32px;
+}
+
+.formButton:hover{ 
+    background-color: rgb(243, 243, 243);
+    border: 2px solid rgb(148, 148, 148);
+    border-radius: 3PX;
+    cursor: pointer;
+}
+
+.bp3-input{
+    width: 250px;
+    font-size: 1.2rem;
+    padding: 4px;
+    margin-top: 4px;
+}
+.bp3-form-group{
+    margin: 8px;
+}
 
 @media only screen and (max-width: 900px) {
     .centeredPageWrapper{
