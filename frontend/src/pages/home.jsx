@@ -1,16 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
+import Loader from '../components/Loader';
 import { UserContext } from '../context/UserContext';
 import Login from './Login';
 import RecipeView from './RecipeView';
 
 export default function Home() {
-  // eslint-disable-next-line no-unused-vars
-  const [userContext, setUserContext] = useContext(UserContext);
+  const [userContext] = useContext(UserContext);
+  const shouldLogIn = userContext.token === null;
+  const isLoggedIn = !!userContext.token; // !! <= boolean from other value
+
   return (
-    !userContext.token ? (
-      <Login />
-    ) : (
-      <RecipeView />
-    )
+    <>
+      {shouldLogIn && <Login />}
+      {!shouldLogIn && !isLoggedIn && <Loader />}
+      {isLoggedIn && <RecipeView />}
+    </>
   );
 }
