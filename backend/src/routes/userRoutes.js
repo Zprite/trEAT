@@ -123,6 +123,7 @@ router.post("/refreshToken", (req, res, next) => {
   }
 })
 
+// Extract refreshToken cookie, and delete from database.
 router.get("/logout", verifyUser, (req, res, next) => {
   const { signedCookies = {} } = req
   const { refreshToken } = signedCookies
