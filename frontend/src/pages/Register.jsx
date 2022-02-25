@@ -42,7 +42,7 @@ export default function Register() {
         <section className="authEndSection">
           <div className="flexRow">
             Allready have an account:
-            <Link to="/login">
+            <Link to="/">
               <div className="space">
                 Sign in
               </div>

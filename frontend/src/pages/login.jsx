@@ -1,14 +1,55 @@
-/* eslint-disable no-console */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Button, FormGroup, InputGroup } from '@blueprintjs/core';
+import {
+  Button, Callout, FormGroup, InputGroup,
+} from '@blueprintjs/core';
+import { UserContext } from '../context/UserContext';
 
 export default function Login() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorState, setErrorState] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const [userContext, setUserContext] = useContext(UserContext);
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorState('');
+    const genericErrorMessage = 'Login failed';
+    axios({
+      method: 'post',
+      url: 'http://localhost:8000/users/login',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: 'include',
+      data: JSON.stringify({ username, password }),
+    })
+      .then(async (response) => {
+        // handle success
+        console.log(response);
+        setIsSubmitting(false);
+        setUserContext((oldValues) => ({ ...oldValues, token: response.data.token }));
+      })
+      .catch((response) => {
+        // handle error
+        console.log(response);
+        setIsSubmitting(false);
+        if (response.status === 400) {
+          setErrorState('Please fill all the fields correctly!');
+        } else if (response.status === 401) {
+          setErrorState('Invalid username and password combination.');
+        } else {
+          setErrorState(genericErrorMessage);
+        }
+      });
+  };
+
   return (
-    <form className="authForm">
+    <form onSubmit={formSubmitHandler} className="authForm">
       <div className="authFormInner">
         <h2>Sign in</h2>
         <FormGroup label="Username" labelFor="username">
@@ -40,7 +81,15 @@ export default function Login() {
               </div>
             </Link>
           </div>
-          <Button className="formButton" intent="primary" fill type="submit" text="Sign In" />
+          {errorState && <Callout intent="danger">{errorState}</Callout>}
+          <Button
+            className="formButton"
+            intent="primary"
+            fill
+            type="submit"
+            disabled={isSubmitting}
+            text={`${isSubmitting ? 'Signing In' : 'Sign In'}`}
+          />
         </section>
       </div>
     </form>

@@ -7,11 +7,11 @@ import styles from '../styles/Navbar.module.css';
 export default function NavBar() {
   return (
     <div className={styles.navbar}>
-      <Link to="/recipeView" className={styles.logoButton}>
+      <Link to="/" className={styles.logoButton}>
         <Logo />
       </Link>
       <div>
-        <Link to="/recipeView" className={styles.searchButton}>
+        <Link to="/" className={styles.searchButton}>
           <div>
             <FaSearch className={styles.searchIcon} />
           </div>
