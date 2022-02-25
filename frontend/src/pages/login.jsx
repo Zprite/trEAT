@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, FormGroup, InputGroup } from '@blueprintjs/core';
 
 export default function Login() {
@@ -30,7 +31,17 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormGroup>
-        <Button className="formButton" intent="primary" fill type="submit" text="Sign In" />
+        <section className="authEndSection">
+          <div className="flexRow">
+            Create an account:
+            <Link to="/register">
+              <div className="space">
+                Register
+              </div>
+            </Link>
+          </div>
+          <Button className="formButton" intent="primary" fill type="submit" text="Sign In" />
+        </section>
       </div>
     </form>
   );
