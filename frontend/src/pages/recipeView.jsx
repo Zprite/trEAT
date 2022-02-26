@@ -17,7 +17,7 @@ export default function RecipeView() {
         const response = await axios.get(
           'http://localhost:8000/recipes',
         );
-        console.log(response);
+        // console.log(response);
         setRecipeData(response.data);
         setError(null);
       } catch (err) {

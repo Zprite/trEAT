@@ -18,6 +18,7 @@ const jwtStrategy = () => {
       // This can be avoided if you don't want to fetch user details in each request.
       userSchema.findOne({ _id: jwt_payload._id }, function (err, user) {
         if (err) {
+          console.log(err)
           return done(err, false)
         }
         if (user) {

@@ -15,9 +15,10 @@ export default function Logout() {
       url: 'http://localhost:8000/users/logout',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${userContext.token}`,
       },
       withCredentials: 'include',
-      Authorization: `Bearer ${userContext.token}`,
+
     })
       .then((response) => {
       // handle success

@@ -7,7 +7,7 @@ import RecipeBody from '../../components/RecipeBody';
 import '../../styles/globals.css';
 import styles from '../../styles/recipePage.module.css';
 
-export default function recipePage() {
+export default function RecipePage() {
   const [recipeData, setRecipeData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);

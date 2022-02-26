@@ -127,6 +127,9 @@ router.post("/refreshToken", (req, res, next) => {
 router.get("/logout", verifyUser, (req, res, next) => {
   const { signedCookies = {} } = req
   const { refreshToken } = signedCookies
+  //console.log("logout request:", req);
+  console.log("logging out:");
+  console.log("signed cookies: ", signedCookies);
   userSchema.findById(req.user._id).then(
     user => {
       const tokenIndex = user.refreshToken.findIndex(
