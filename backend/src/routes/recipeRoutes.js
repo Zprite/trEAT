@@ -1,5 +1,6 @@
 import { Recipe } from '../models.js'
 import express from 'express'
+import { getToken, COOKIE_OPTIONS, getRefreshToken, verifyUser } from "../authenticate.js"
 
 const router = express.Router();
 
@@ -16,21 +17,21 @@ router.route('/recipes').get((req, res) => {
 })
 
 // create a new document
-router.route('/recipes').post(async (req, res) => {
+router.post('/recipes', verifyUser, ((req, res, next) => {
   const { body } = req
-
   const recipe = new Recipe({
     title: body.title,
     description: body.description,
     duration: body.duration,
     stepsMarkdown: body.stepsMarkdown,
     ingredients: body.ingredients,
-    imagePath: body.imagePath
+    imagePath: body.imagePath,
+    userID: req.user._id,
   });
 
-  const saveRes = await recipe.save()
+  const saveRes = recipe.save()
   res.json({ data: saveRes })
-})
+}));
 
 
 router.route('/recipe/:id').get(async (req, res) => {

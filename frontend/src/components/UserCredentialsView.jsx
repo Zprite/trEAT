@@ -50,6 +50,7 @@ export default function UserCredentialsView() {
       <div>
         <h2>{`Welcome ${userContext.details.fullName}`}</h2>
         <h3>{`Username: ${userContext.details.username}`}</h3>
+        <h4>{`Username: ${userContext.details._id}`}</h4>
       </div>
     )
   );

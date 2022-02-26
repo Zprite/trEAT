@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { UserContext } from '../context/UserContext';
 import Header from '../components/Header';
 import RecipeImageInput from '../components/RecipeImageInput';
 import RecipeTitleInput from '../components/RecipeTitleInput';
@@ -23,6 +24,8 @@ export default function Create() {
   const [imageError, setImageError] = useState(false);
   const [ingredientsError, setIngredientsError] = useState(false);
   const [markdownError, setMarkdownError] = useState(false);
+
+  const [userContext] = useContext(UserContext);
 
   useEffect(() => {
     setImageError(imageData == null);
@@ -65,6 +68,7 @@ export default function Create() {
       url: 'http://localhost:8000/recipes/',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${userContext.token}`,
       },
       data: json,
     })
