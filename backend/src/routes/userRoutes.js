@@ -152,6 +152,8 @@ router.get("/logout", verifyUser, (req, res, next) => {
   )
 })
 
+// TODO : add recipe to user collection
+
 // get list of all users
 router.route('/users').get(async (req, res) => {
   userSchema.find().populate("recipes").then(users => {
@@ -192,5 +194,6 @@ router.route('/user/:id').get(async (req, res) => {
   }
   res.send({ data: getRes })
 })
+
 
 export default router;
