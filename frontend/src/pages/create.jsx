@@ -12,6 +12,7 @@ import RecipeDescriptionInput from '../components/RecipeDescriptionInput';
 import RecipeIngredientsInput from '../components/RecipeIngredientsInput';
 import RecipeStepsMarkdown from '../components/RecipeStepsMarkdown';
 import NavBar from '../components/NavBar';
+import AuthWrapper from '../components/AuthWrapper';
 
 export default function Create() {
   const [markdownData, setMarkdownData] = useState();
@@ -122,58 +123,58 @@ export default function Create() {
   };
 
   return (
-    <div>
-      <NavBar />
-      <div className="centeredPageWrapper">
-        <Header title="Create recipe" />
-        <form className="recipeCreator" onSubmit={handleSubmit(onFormSubmit, onErrors)}>
-          <RecipeImageInput passData={getImageData} />
-          <div className={styles.timeTitleContainer}>
-            <RecipeTitleInput register={register} />
-            <RecipeTimeInput register={register} />
-          </div>
-          <RecipeDescriptionInput register={register} />
-          <RecipeIngredientsInput passData={getIngredientsData} />
-          <RecipeStepsMarkdown register={register} passData={getMarkdownData} />
-          <div className={styles.errorMessgeContainer}>
+    <AuthWrapper>
+      <div>
+        <NavBar />
+        <div className="centeredPageWrapper">
+          <Header title="Create recipe" />
+          <form className="recipeCreator" onSubmit={handleSubmit(onFormSubmit, onErrors)}>
+            <RecipeImageInput passData={getImageData} />
+            <div className={styles.timeTitleContainer}>
+              <RecipeTitleInput register={register} />
+              <RecipeTimeInput register={register} />
+            </div>
+            <RecipeDescriptionInput register={register} />
+            <RecipeIngredientsInput passData={getIngredientsData} />
+            <RecipeStepsMarkdown register={register} passData={getMarkdownData} />
+            <div className={styles.errorMessgeContainer}>
 
-            {(imageError
+              {(imageError
               && (
                 <div className={styles.errorMessage}>
                   Please upload an image with your recipe.
                 </div>
               ))}
-            {(errors.title
+              {(errors.title
               && (
                 <div className={styles.errorMessage}>
                   Please give your recipe a title. Cannot exceed 40 characters
                 </div>
               ))}
-            {(errors.description && (
+              {(errors.description && (
               <div className={styles.errorMessage}>
                 Please give your recipe a description. Cannot exceed 200 characters.
               </div>
-            ))}
-            {(ingredientsError
+              ))}
+              {(ingredientsError
               && (
                 <div className={styles.errorMessage}>
                   Please provide one or more ingredients with your recipe.
                 </div>
               )
             )}
-            {(markdownError
+              {(markdownError
               && (
                 <div className={styles.errorMessage}>
                   Please provide recipe steps. Cannot exceed 4000 characters.
                 </div>
               )
             )}
-          </div>
-          <button type="submit" value="Submit" className={styles.submitButton}>Submit</button>
-
-        </form>
-
+            </div>
+            <button type="submit" value="Submit" className={styles.submitButton}>Submit</button>
+          </form>
+        </div>
       </div>
-    </div>
+    </AuthWrapper>
   );
 }
