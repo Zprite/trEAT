@@ -3,9 +3,6 @@
     box-sizing: border-box;
 }
 
-div, img{
-    border-radius: 8px;
-}
 
 h1 {
     font-size: 2.5em;

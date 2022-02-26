@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Create from './pages/Create';
 import RecipePage from './pages/recipe/RecipePage';
 import Register from './pages/Register';
+import Logout from './pages/Logout';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -29,7 +30,7 @@ function App() {
       })
       .catch((response) => {
       // handle error
-        console.log(response);
+        console.log('Fetch refresh token fail:', response);
         // remove token and log out user.
         setUserContext((oldValues) => ({ ...oldValues, token: null }));
       });
@@ -40,6 +41,22 @@ function App() {
   useEffect(() => {
     verifyUser();
   }, [verifyUser]);
+
+  // Sync logout across tabs
+  const syncLogout = useCallback((event) => {
+    if (event.key === 'logout') {
+      // If using react-router-dom, you may call history.push("/")
+      window.location.reload();
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('storage', syncLogout);
+    return () => {
+      window.removeEventListener('storage', syncLogout);
+    };
+  }, [syncLogout]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -48,6 +65,7 @@ function App() {
         <Route path="recipePage" element={<RecipePage />} />
         <Route path="recipe/:id" element={<RecipePage />} />
         <Route path="register" element={<Register />} />
+        <Route path="logout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );

@@ -127,16 +127,14 @@ router.post("/refreshToken", (req, res, next) => {
 router.get("/logout", verifyUser, (req, res, next) => {
   const { signedCookies = {} } = req
   const { refreshToken } = signedCookies
-  User.findById(req.user._id).then(
+  userSchema.findById(req.user._id).then(
     user => {
       const tokenIndex = user.refreshToken.findIndex(
         item => item.refreshToken === refreshToken
       )
-
       if (tokenIndex !== -1) {
         user.refreshToken.id(user.refreshToken[tokenIndex]._id).remove()
       }
-
       user.save((err, user) => {
         if (err) {
           res.statusCode = 500
