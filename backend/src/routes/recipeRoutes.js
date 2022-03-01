@@ -31,7 +31,7 @@ router.post('/recipes', verifyUser, (async (req, res, next) => {
 
   const saveRes = await recipe.save()
   res.json({ data: saveRes })
-  User.findByIdAndUpdate({ _id: req.user._id }, { $push: { recipes: "621e16301b49757315464ead" } }).exec()
+  User.findByIdAndUpdate({ _id: req.user._id }, { $push: { recipes: saveRes._id } }).exec()
 }));
 
 router.post('/uploadRecipe', verifyUser, (req, res, next) => {
