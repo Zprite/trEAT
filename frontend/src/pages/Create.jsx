@@ -97,7 +97,7 @@ export default function Create() {
       method: 'post',
       url: 'http://localhost:8000/imageUpload',
       data: formData,
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${userContext.token}` },
     })
       .then((response) => {
         // handle success
