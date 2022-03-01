@@ -48,6 +48,7 @@
 
 .linkBox {
     display: flex;
+    display: none;
     justify-content: end;
     align-items: flex-end;
 }

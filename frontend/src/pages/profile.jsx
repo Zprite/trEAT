@@ -34,7 +34,10 @@ export default function Profile() {
       <NavBar />
       <div className={styles.profileWrapper}>
         <div>
-          <ProfileInfo userName="Ola Nordmann" picture="https://kvener.no/wp-content/uploads/2019/02/blank-profile-picture-973460_640.png" />
+          <ProfileInfo
+            userName={ProfileInfo.userName}
+            profilePicture={ProfileInfo.profilePicture}
+          />
         </div>
         <h2>Mine oppskrifter</h2>
         <div className={styles.recipeContainer}>
