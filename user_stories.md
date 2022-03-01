@@ -1,5 +1,7 @@
 # Brukerhistorier
 
+# Sprint 1
+
 ## Brukerhistorie 1
 ### Oppskriftsskjema (frontend) (2+3p)
 Som bruker ønsker jeg å opprette en oppskrift med tittel, bilde, ingredienser, beskrivelse av oppskriften og fremgangsmåte. 
@@ -23,6 +25,8 @@ Som bruker ønsker jeg å kunne finne igjen oppskrifter når jeg bruker appen ne
 Sette opp et enkel backend for å lagre oppskrifter. 
 ### Hvordan demonstrere
 Jeg kan fylle ut oppskriftsskjemaet og det blir lagret til en database
+
+# Sprint 2
 
 ## Brukerhistorie 4
 ### Autentisering (frontend + backend) (4p)
