@@ -1,6 +1,8 @@
 .profileContainer {
     background-color: rgb(236, 236, 235);
     padding: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .profileContainer img {

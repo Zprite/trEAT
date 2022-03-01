@@ -7,6 +7,7 @@ import Create from './pages/Create';
 import RecipePage from './pages/recipe/RecipePage';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
+import Profile from './pages/Profile';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -66,6 +67,7 @@ function App() {
         <Route path="recipe/:id" element={<RecipePage />} />
         <Route path="register" element={<Register />} />
         <Route path="logout" element={<Logout />} />
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
