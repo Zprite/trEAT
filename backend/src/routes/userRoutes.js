@@ -1,4 +1,4 @@
-import { User } from '../models.js'
+import { Recipe, User } from '../models.js'
 import express from 'express'
 import { getToken, COOKIE_OPTIONS, getRefreshToken, verifyUser } from "../authenticate.js"
 import passport from "passport"
@@ -8,8 +8,13 @@ const router = express.Router();
 
 // Get user credentials. 
 // Checks validity using verifyUser using JwtStrategy (gets JWT from bearer-token header) 
-router.get("/me", verifyUser, (req, res, next) => {
-  res.send(req.user)
+router.get("/me", verifyUser, async (req, res, next) => {
+  const courses = await User
+    .findOne({ _id: req.user._id })
+    .populate('recipes')
+
+  res.send(courses)
+  console.log(courses)
 })
 
 router.post("/login", passport.authenticate('local'), (req, res, next) => {
