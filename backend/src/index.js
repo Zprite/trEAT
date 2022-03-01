@@ -2,10 +2,10 @@ import express from 'express'
 import 'dotenv/config'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import path from 'path'
 import cookieParser from 'cookie-parser'
 import connectToDB from "./utils/connectdb.js"
 import passport from "passport"
+import { getPublicDirPath } from './utils.js'
 
 const app = express()
 
@@ -45,7 +45,9 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 // Set public folder, mainly for image uploads
-app.use('/public', express.static(path.join(path.resolve(), '../public')))
+console.log(getPublicDirPath())
+app.use(express.static(getPublicDirPath()))
+
 
 app.use(passport.initialize())
 
