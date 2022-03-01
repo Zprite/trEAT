@@ -5,6 +5,7 @@ import RecipeThumbnail from '../components/Thumbnail';
 import SearchBar from '../components/SearchBar';
 import NavBar from '../components/NavBar';
 import styles from '../styles/recipeOverview.module.css';
+import UserCredentialsView from '../components/UserCredentialsView';
 
 export default function RecipeView() {
   const [recipeData, setRecipeData] = useState(null);
@@ -17,7 +18,7 @@ export default function RecipeView() {
         const response = await axios.get(
           'http://localhost:8000/recipes',
         );
-        console.log(response);
+        // console.log(response);
         setRecipeData(response.data);
         setError(null);
       } catch (err) {
@@ -35,6 +36,7 @@ export default function RecipeView() {
       <NavBar />
       <div className={styles.outerContainer}>
         <div className={styles.recipeContainer}>
+          <UserCredentialsView />
           <SearchBar />
           {loading && <div>Loading recipes...</div>}
           {error && (

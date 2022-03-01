@@ -31,7 +31,6 @@
     padding: 12px;
     margin-top: 24px;
     margin-bottom: 32px;
-    transition: 0.1s ease-in-out;
 }
 
 .submitButton:hover{ 

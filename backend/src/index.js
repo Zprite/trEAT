@@ -1,56 +1,64 @@
 import express from 'express'
+import 'dotenv/config'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import path from'path'
-import mongoose from 'mongoose'
-import router from './routes.js'
-import multer from "multer"
+import cookieParser from 'cookie-parser'
+import connectToDB from "./utils/connectdb.js"
+import passport from "passport"
 import { getPublicDirPath } from './utils.js'
 
 const app = express()
-const PORT = 8000
 
+// Routers
+import userRouter from "./routes/userRoutes.js"
+import recipeRouter from "./routes/recipeRoutes.js"
+import imageRouter from "./routes/fileUploadRoutes.js"
+
+// Strategies
+import jwtStrategy from "./strategies/JwtStrategy.js"
+import localStrategy from "./strategies/LocalStrategy.js"
+
+// Call to setup passport strategies
+jwtStrategy()
+localStrategy()
 
 // handle json
 app.use(bodyParser.json({ extended: true }))
+app.use(cookieParser(process.env.COOKIE_SECRET))
 
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '../public/uploads')
+//Add the client URL to the CORS policy
+const whitelist = process.env.WHITELISTED_DOMAINS
+    ? process.env.WHITELISTED_DOMAINS.split(",")
+    : []
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error("Not allowed by CORS"))
+        }
     },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-    }
-});
+    credentials: true,
+}
 
-//will be using this for uplading
-const upload = multer({ storage: storage });
+app.use(cors(corsOptions))
 
-// origins should be spesified in prod
-app.use(cors());
-app.use(router);
-// app.use('/public', express.static(path.join(path.resolve(), '../public')))
-//app.use('/ftp', express.static('public'), serveIndex('public', {'icons': true})); 
-console.log(path.resolve())
+// Set public folder, mainly for image uploads
+console.log(getPublicDirPath())
 app.use(express.static(getPublicDirPath()))
- 
-app.get('/', function(req,res) {
+
+
+app.use(passport.initialize())
+
+app.use("/users", userRouter)
+app.use("/", imageRouter)
+app.use("/", recipeRouter)
+
+app.get('/', function (req, res) {
     return res.send("hello from my app express server!")
 })
 
-app.post('/imageUpload', upload.single('file'), function(req,res) {
-    const imagePath = "http://" + req.hostname + ":" + PORT +"/" + req.file.path;
-    console.log('storage location of file upload: ', imagePath);
-    return res.send(imagePath);
-})
+connectToDB();
 
-// Connect to mongodb
-mongoose
-    .connect(
-        "mongodb+srv://henrikskog:JYN*yvn1dyk7anx*jmy@cluster0.ycj8k.mongodb.net/Cluster0?retryWrites=true&w=majority",
-        { useNewUrlParser: true, useUnifiedTopology: true }
-    )
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.log(err));
-
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}...`))
+const server = app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}...`))

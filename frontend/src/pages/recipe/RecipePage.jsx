@@ -4,10 +4,11 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import IngredientsView from '../../components/IngredientsView';
 import RecipeBody from '../../components/RecipeBody';
+import NavBar from '../../components/NavBar';
 import '../../styles/globals.css';
 import styles from '../../styles/recipePage.module.css';
 
-export default function recipePage() {
+export default function RecipePage() {
   const [recipeData, setRecipeData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
@@ -35,27 +36,31 @@ export default function recipePage() {
 
   console.log(recipeData);
   return (
-    <div className="recipePageWrapper">
-      {loading && <div>Loading recipes...</div>}
-      {error && (
-      <div>{`Error fetching recipes:  ${error}`}</div>
-      )}
-      {recipeData && (
-      <>
-        <img
-          src={recipeData.imagePath}
-          alt="recipeImage"
-          className={styles.recipeImage}
-        />
-        <div className={styles.recipeContainer}>
-          <div className={styles.ingredientsContainer}>
-            <h2 className={styles.ingredientsHeader}>Ingredients</h2>
-            <IngredientsView recipeObject={recipeData} />
+    <>
+      <NavBar />
+
+      <div className="recipePageWrapper">
+        {loading && <div>Loading recipes...</div>}
+        {error && (
+        <div>{`Error fetching recipes:  ${error}`}</div>
+        )}
+        {recipeData && (
+        <>
+          <img
+            src={recipeData.imagePath}
+            alt="recipeImage"
+            className={styles.recipeImage}
+          />
+          <div className={styles.recipeContainer}>
+            <div className={styles.ingredientsContainer}>
+              <h2 className={styles.ingredientsHeader}>Ingredients</h2>
+              <IngredientsView recipeObject={recipeData} />
+            </div>
+            <RecipeBody recipeObject={recipeData} />
           </div>
-          <RecipeBody recipeObject={recipeData} />
-        </div>
-      </>
-      )}
-    </div>
+        </>
+        )}
+      </div>
+    </>
   );
 }
