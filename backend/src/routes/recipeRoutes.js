@@ -1,4 +1,4 @@
-import { Recipe } from '../models.js'
+import { Recipe, User } from '../models.js'
 import express from 'express'
 import { getToken, COOKIE_OPTIONS, getRefreshToken, verifyUser } from "../authenticate.js"
 
@@ -17,7 +17,7 @@ router.route('/recipes').get((req, res) => {
 })
 
 // create a new document
-router.post('/recipes', verifyUser, ((req, res, next) => {
+router.post('/recipes', verifyUser, (async (req, res, next) => {
   const { body } = req
   const recipe = new Recipe({
     title: body.title,
@@ -29,10 +29,17 @@ router.post('/recipes', verifyUser, ((req, res, next) => {
     userID: req.user._id,
   });
 
-  const saveRes = recipe.save()
+  const saveRes = await recipe.save()
   res.json({ data: saveRes })
+  User.findByIdAndUpdate({ _id: req.user._id }, { $push: { recipes: "621e16301b49757315464ead" } }).exec()
 }));
 
+router.post('/uploadRecipe', verifyUser, (req, res, next) => {
+  console.log("userid:", req.user._id)
+
+  res.status(200)
+  res.send()
+})
 
 router.route('/recipe/:id').get(async (req, res) => {
   const { params } = req

@@ -10,7 +10,7 @@ const Session = new Schema({
     },
 })
 
-const User = new Schema({
+const userSchema = new Schema({
     fullName: {
         type: String,
         default: "",
@@ -33,14 +33,14 @@ const User = new Schema({
 })
 
 //Remove refreshToken from the response
-User.set("toJSON", {
+userSchema.set("toJSON", {
     transform: function (doc, ret, options) {
         delete ret.refreshToken
         return ret
     },
 })
 
-User.plugin(passportLocalMongoose)
+userSchema.plugin(passportLocalMongoose)
 
 const recipeSchema = new Schema({
     title: String,
@@ -59,4 +59,4 @@ const recipeSchema = new Schema({
 
 // create a model with studentSchema
 export const Recipe = mongoose.model('Recipe', recipeSchema);
-export const userSchema = mongoose.model("User", User);
+export const User = mongoose.model("User", userSchema);

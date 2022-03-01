@@ -1,6 +1,6 @@
 import passport from 'passport'
 import passportJwt from 'passport-jwt'
-import { userSchema } from '../models.js'
+import { User } from '../models.js'
 
 const jwtStrategy = () => {
   const JwtStrategy = passportJwt.Strategy;
@@ -16,7 +16,7 @@ const jwtStrategy = () => {
     new JwtStrategy(opts, function (jwt_payload, done) {
       // Check against the DB only if necessary.
       // This can be avoided if you don't want to fetch user details in each request.
-      userSchema.findOne({ _id: jwt_payload._id }, function (err, user) {
+      User.findOne({ _id: jwt_payload._id }, function (err, user) {
         if (err) {
           console.log(err)
           return done(err, false)

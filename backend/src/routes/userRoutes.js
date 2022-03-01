@@ -1,4 +1,4 @@
-import { userSchema } from '../models.js'
+import { User } from '../models.js'
 import express from 'express'
 import { getToken, COOKIE_OPTIONS, getRefreshToken, verifyUser } from "../authenticate.js"
 import passport from "passport"
@@ -15,7 +15,7 @@ router.get("/me", verifyUser, (req, res, next) => {
 router.post("/login", passport.authenticate('local'), (req, res, next) => {
   const token = getToken({ _id: req.user._id })
   const refreshToken = getRefreshToken({ _id: req.user._id })
-  userSchema.findById(req.user._id).then(
+  User.findById(req.user._id).then(
     user => {
       user.refreshToken.push({ refreshToken })
       user.save((err, user) => {
@@ -40,8 +40,8 @@ router.post("/signup", (req, res, next) => {
       message: "Full Name is required",
     })
   } else {
-    userSchema.register(
-      new userSchema({ username: req.body.username, fullName: req.body.fullName }),
+    User.register(
+      new User({ username: req.body.username, fullName: req.body.fullName }),
       req.body.password,
       (err, user) => {
         if (err) {
@@ -81,7 +81,7 @@ router.post("/refreshToken", (req, res, next) => {
     try {
       const payload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
       const userId = payload._id
-      userSchema.findOne({ _id: userId }).then(
+      User.findOne({ _id: userId }).then(
         user => {
           if (user) {
             // Find the refresh token against the user record in database
@@ -130,7 +130,7 @@ router.get("/logout", verifyUser, (req, res, next) => {
   //console.log("logout request:", req);
   console.log("logging out:");
   console.log("signed cookies: ", signedCookies);
-  userSchema.findById(req.user._id).then(
+  User.findById(req.user._id).then(
     user => {
       const tokenIndex = user.refreshToken.findIndex(
         item => item.refreshToken === refreshToken
@@ -156,7 +156,7 @@ router.get("/logout", verifyUser, (req, res, next) => {
 
 // get list of all users
 router.route('/users').get(async (req, res) => {
-  userSchema.find().populate("recipes").then(users => {
+  User.find().populate("recipes").then(users => {
     res.send(users)
   }).catch(err => {
     res.send("there was an error")
@@ -183,7 +183,7 @@ router.route('/user/:id').get(async (req, res) => {
     res.status(400);
   }
   else {
-    getRes = await userSchema.findOne({ _id: params.id }).populate('recipes')
+    getRes = await User.findOne({ _id: params.id }).populate('recipes')
     if (getRes == null) {
       getRes = { error: "Recipe not found" }
       res.status(204);
