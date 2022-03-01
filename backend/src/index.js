@@ -5,6 +5,7 @@ import path from'path'
 import mongoose from 'mongoose'
 import router from './routes.js'
 import multer from "multer"
+import { getPublicDirPath } from './utils.js'
 
 const app = express()
 const PORT = 8000
@@ -28,8 +29,10 @@ const upload = multer({ storage: storage });
 // origins should be spesified in prod
 app.use(cors());
 app.use(router);
-app.use('/public', express.static(path.join(path.resolve(), '../public')))
+// app.use('/public', express.static(path.join(path.resolve(), '../public')))
 //app.use('/ftp', express.static('public'), serveIndex('public', {'icons': true})); 
+console.log(path.resolve())
+app.use(express.static(getPublicDirPath()))
  
 app.get('/', function(req,res) {
     return res.send("hello from my app express server!")
