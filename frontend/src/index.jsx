@@ -6,6 +6,7 @@ import Create from './pages/create';
 import RecipePage from './pages/recipe/recipePage';
 import RecipeView from './pages/recipeView';
 import LogInPage from './pages/logInPage';
+import Profile from './pages/profile';
 
 const rootElement = document.getElementById('root');
 render(
@@ -16,6 +17,7 @@ render(
       <Route path="recipePage" element={<RecipePage />} />
       <Route path="recipeView" element={<RecipeView />} />
       <Route path="recipe/:id" element={<RecipePage />} />
+      <Route path="profile" element={<Profile />} />
       <Route path="logInPage" element={<LogInPage />} />
     </Routes>
   </BrowserRouter>,
