@@ -46,6 +46,22 @@
     top: 3px;
 }
 
+.linkBox {
+    display: flex;
+    display: none;
+    justify-content: end;
+    align-items: flex-end;
+}
+
+.editLink {
+    display: inline;
+}
+
+.editIcon {
+    font-size: 3rem;
+    color: #008f67;
+}
+
 /* Small devices (landsscape phones) standard */
 /* Medium devices (tablets) */
 @media (min-width: 650px) {

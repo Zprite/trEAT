@@ -23,7 +23,7 @@ export default function NavBar() {
             <FaPlus className={styles.plusIcon} />
           </div>
         </Link>
-        <Link to="/create" className={cn(styles.navbarButton, styles.profileButton)}>
+        <Link to="/profile" className={styles.profileButton}>
           <div>
             <FaRegUser className={styles.userIcon} />
           </div>

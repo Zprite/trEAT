@@ -1,3 +1,20 @@
+.profileWrapper {
+    background-color: #f7f7f4;
+}
+
+
+
+.profileWrapper h2{
+    margin: 2rem 2rem 1.5rem 2rem;
+    border-bottom: 2px solid rgb(116, 112, 112);
+    color: rgb(116, 112, 112);
+    padding: 1rem;
+    font-size: 2rem;
+    font-weight: 500;
+    
+}
+
+
 .outerContainer {
     width: 100%;
     display: flex;
