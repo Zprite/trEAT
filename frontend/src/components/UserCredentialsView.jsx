@@ -4,6 +4,7 @@ import { UserContext } from '../context/UserContext';
 
 export default function UserCredentialsView() {
   const [userContext, setUserContext] = useContext(UserContext);
+  const DEBUG = false;
 
   const fetchUserDetails = useCallback(
     () => {
@@ -50,7 +51,7 @@ export default function UserCredentialsView() {
       <div>
         <h2>{`Welcome ${userContext.details.fullName}`}</h2>
         <h3>{`Username: ${userContext.details.username}`}</h3>
-        <h4>{`Username: ${userContext.details._id}`}</h4>
+        {DEBUG && <h4>{`UserID: ${userContext.details._id}`}</h4>}
       </div>
     )
   );
