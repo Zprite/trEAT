@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
+import cn from 'classnames';
 import NavBar from '../components/NavBar';
 import RecipeThumbnail from '../components/Thumbnail';
 import ProfileInfo from '../components/ProfileInfo';
@@ -52,7 +53,7 @@ export default function Profile() {
       <div>Loading Recipes</div>) : (
         <div>
           <NavBar />
-          <div className={styles.profileWrapper}>
+          <div className={cn(styles.profileWrapper, 'background')}>
             <div>
               <ProfileInfo
                 userName={userContext.details.username}
@@ -60,7 +61,7 @@ export default function Profile() {
               />
             </div>
             <h2>Mine oppskrifter</h2>
-            <div className={styles.recipeContainer}>
+            <div className={cn('recipeContainer', 'background')}>
               {userContext.details && userContext.details.recipes.map((recipe) => (
                 <RecipeThumbnail
                   key={recipe._id}

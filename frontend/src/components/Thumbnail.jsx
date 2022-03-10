@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { FaRegClock, FaStar, FaRegEdit } from 'react-icons/fa';
 import styles from '../styles/Thumbnail.module.css';
@@ -13,7 +14,7 @@ export default function Thumbnail({
   link, // 150 characters?
 }) {
   return (
-    <div className={styles.box}>
+    <div className={cn(styles.box, 'elementBackground')}>
       <Link className={styles.link} to={link}>
         <div id="heading">
           <h1>{title}</h1>

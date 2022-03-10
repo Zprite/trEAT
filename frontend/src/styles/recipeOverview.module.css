@@ -2,26 +2,4 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: #f7f7f4;
 }
-
-.recipeContainer {
-    background-color: #f7f7f4;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0.6rem 0.8rem;
-}
-
-/* Small devices (landsscape phones) standard */
-/* Medium devices (tablets) */
-@media (min-width: 650px) {
-    .recipeContainer {        
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        align-items: flex-start;
-        max-width: 1600px;
-    }
-}
-/* Large divices (large desktops) */

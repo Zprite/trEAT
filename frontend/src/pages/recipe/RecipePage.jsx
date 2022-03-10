@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import IngredientsView from '../../components/IngredientsView';
 import RecipeBody from '../../components/RecipeBody';
@@ -51,7 +52,7 @@ export default function RecipePage() {
             alt="recipeImage"
             className={styles.recipeImage}
           />
-          <div className={styles.recipeContainer}>
+          <div className={cn('recipeContainer', 'background')}>
             <div className={styles.ingredientsContainer}>
               <h2 className={styles.ingredientsHeader}>Ingredients</h2>
               <IngredientsView recipeObject={recipeData} />

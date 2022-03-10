@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import cn from 'classnames';
 import RecipeThumbnail from '../components/Thumbnail';
 import SearchBar from '../components/SearchBar';
 import NavBar from '../components/NavBar';
@@ -34,8 +35,8 @@ export default function RecipeView() {
   return (
     <div>
       <NavBar />
-      <div className={styles.outerContainer}>
-        <div className={styles.recipeContainer}>
+      <div className={cn(styles.outerContainer, 'background')}>
+        <div className={cn('recipeContainer', 'background')}>
           <UserCredentialsView />
           <SearchBar />
           {loading && <div>Loading recipes...</div>}
