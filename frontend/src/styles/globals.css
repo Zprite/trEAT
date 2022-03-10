@@ -3,7 +3,6 @@
     box-sizing: border-box;
 }
 
-
 h1 {
     font-size: 2.5em;
     font-weight: 400;
@@ -16,12 +15,42 @@ p {
     margin: 0.8rem 0.8rem 1.8rem 0.8rem;
     font-size: 1.15rem;
     color: #3b3b45;
+    text-decoration: none; /* no underline */
     overflow: hidden;
 }
 
 img {
     object-fit: cover;
 }
+
+.background {
+    background-color: #f7f7f4;
+}
+
+.elementBackground{
+    background-color: #e3e3da;
+}
+
+:root {
+    color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --special-text-color: hsla(60, 50%, 70%, 0.75);
+        --border-color: white;
+    }
+    .background{
+        background-color: #2e2e2e;
+    }
+    .elementBackground{
+        background-color: #3b3b45;
+    }
+    p {
+        color: #e3e3da;
+    }
+}
+
 
 .centeredPageWrapper{
     width: 70%;
@@ -131,6 +160,26 @@ body {
     margin: 0 auto;
     margin-top: 20vw;
 }
+
+.recipeContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0.6rem 0.8rem;
+}
+
+/* Small devices (landsscape phones) standard */
+/* Medium devices (tablets) */
+@media (min-width: 650px) {
+    .recipeContainer {        
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: flex-start;
+        max-width: 1600px;
+    }
+}
+/* Large divices (large desktops) */
 
 @media only screen and (max-width: 900px) {
     .centeredPageWrapper{
