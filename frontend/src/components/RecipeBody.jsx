@@ -32,7 +32,7 @@ export default function RecipeBody({ recipeObject }) {
   });
 
   const renderIngredients = () => ((dimensions.width < widthBreakpoint) ? (
-    <div className={styles.ingredientsContainer}>
+    <div className={cn(styles.ingredientsContainer, 'white')}>
       <hr />
       <h2 className={styles.ingredientsHeader}>Ingredients</h2>
       <IngredientsView recipeObject={recipeObject} />

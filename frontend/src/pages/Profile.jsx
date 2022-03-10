@@ -60,7 +60,7 @@ export default function Profile() {
                 profilePicture={ProfileInfo.profilePicture}
               />
             </div>
-            <h2>Mine oppskrifter</h2>
+            <h2 className="blackText">Mine oppskrifter</h2>
             <div className={cn('recipeContainer', 'background')}>
               {userContext.details && userContext.details.recipes.map((recipe) => (
                 <RecipeThumbnail

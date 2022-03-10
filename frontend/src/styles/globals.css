@@ -39,26 +39,6 @@ img {
     color-scheme: light dark;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --special-text-color: hsla(60, 50%, 70%, 0.75);
-        --border-color: white;
-    }
-    .background{
-        background-color: #2e2e2e;
-    }
-    .elementBackground{
-        background-color: #3b3b45;
-    }
-    p {
-        color: #e3e3da;
-    }
-    .white{
-        background-color: #3b3b45;
-    }
-}
-
-
 .centeredPageWrapper{
     width: 70%;
     margin: 0 auto;
@@ -205,5 +185,34 @@ body {
 
     .recipeCreator{
         width: 95%;
+    }
+}
+
+.blackText{
+    color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --special-text-color: hsla(60, 50%, 70%, 0.75);
+        --border-color: white;
+    }
+    .background{
+        background-color: #2e2e2e;
+    }
+    .elementBackground{
+        background-color: #363636;
+    }
+    p {
+        color: #e3e3da;
+    }
+    .white{
+        background-color: #3b3b3b;
+    }
+    .centeredPageWrapper, .recipePageWrapper{
+        background-color: #2e2e2e;
+    }
+    .blackText{
+        color: #fff !important;
     }
 }

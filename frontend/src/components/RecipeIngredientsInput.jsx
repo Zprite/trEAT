@@ -32,7 +32,7 @@ export default function RecipeIngredientsInput({ ingredients, setIngredients }) 
   }
 
   return (
-    <div className={styles.RecipeIngredientsInput}>
+    <div className={cn(styles.RecipeIngredientsInput, 'white')}>
       <h2 className={styles.ingredientTitle}>Ingredients</h2>
       <ul id="recipeList" className={cn(styles.recipeList, 'white')}>
         {ingredients.map((ingredient) => (

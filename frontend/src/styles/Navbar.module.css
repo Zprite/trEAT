@@ -74,3 +74,15 @@
     padding: 0;
 }
 
+@media (prefers-color-scheme: dark) {
+    .profileButton{
+        border: 2px solid #252525;
+    }
+    .searchButton{
+        border: 2px solid #252525;
+    }
+
+    .userIcon, .plusIcon, .searchIcon{
+        color:#3a3a3a;
+    }
+}
