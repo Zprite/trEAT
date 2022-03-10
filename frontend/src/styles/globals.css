@@ -31,6 +31,10 @@ img {
     background-color: #e3e3da;
 }
 
+.white{
+    background-color: #fff;
+}
+
 :root {
     color-scheme: light dark;
 }
@@ -48,6 +52,9 @@ img {
     }
     p {
         color: #e3e3da;
+    }
+    .white{
+        background-color: #3b3b45;
     }
 }
 
