@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../context/UserContext';
 import Header from '../components/Header';
@@ -14,42 +13,30 @@ import RecipeIngredientsInput from '../components/RecipeIngredientsInput';
 import RecipeStepsMarkdown from '../components/RecipeStepsMarkdown';
 import NavBar from '../components/NavBar';
 import AuthWrapper from '../components/AuthWrapper';
+import useErrorOnEmpty from '../hooks/useErrorOnEmpty';
+import RecipeFormErrors from '../components/RecipeFormErrors';
+import { newRecipeImageRequest, newRecipeRequest } from '../requests/createRecipe';
 
 export default function Create() {
+  // State that cannot be handled by react-hook-form
   const [markdownData, setMarkdownData] = useState();
-  const [ingredientsData, setIngredientsData] = useState();
-  const [imageData, setImageData] = useState();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [ingredientsData, setIngredientsData] = useState([]);
+  const [image, setImage] = useState();
 
-  const [imageError, setImageError] = useState(false);
-  const [ingredientsError, setIngredientsError] = useState(false);
-  const [markdownError, setMarkdownError] = useState(false);
+  // React-hook-form functions
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const [userContext] = useContext(UserContext);
 
-  useEffect(() => {
-    setImageError(imageData == null);
-  }, [imageData]);
-
-  useEffect(() => {
-    if (ingredientsData == null) {
-      setIngredientsError(true);
-      return;
-    }
-    setIngredientsError(ingredientsData.length < 1);
-  }, [ingredientsData]);
-
-  useEffect(() => {
-    if (markdownData == null) {
-      setMarkdownError(true);
-      return;
-    }
-    setMarkdownError(markdownData.length < 1 || markdownData.length > 4000);
-  }, [markdownData]);
+  // Error variables
+  const [imageError, setImageError] = useState(false);
+  const [ingredientsError, setIngredientsError] = useState(false);
+  const [markdownError, setMarkdownError] = useState(false);
+  const [serverError, setServerError] = useState(false);
 
   const navigate = useNavigate();
 
-  const submitMainData = (refData, imagePath) => {
+  const postRecipeData = async (refData, imagePath) => {
     const data = {};
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(refData)) {
@@ -60,71 +47,36 @@ export default function Create() {
     data.ingredients = ingredientsData;
     data.imagePath = imagePath;
 
-    // console.log(data);
     const json = JSON.stringify(data);
 
-    axios({
-      method: 'post',
-      url: 'http://localhost:8000/recipes/',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userContext.token}`,
-      },
-      data: json,
-    })
-      .then((response) => {
-        // handle success
-        console.log(response);
-        navigate('/');
-      })
-      .catch((response) => {
-        // handle error
-        console.log(response);
-      });
+    const { error } = await newRecipeRequest(userContext.token, json);
+    if (!error) navigate('/');
+    else setServerError(true);
   };
 
-  const onFormSubmit = (refData) => {
+  const handlePostRecipe = async (img, formData) => {
+    const { error, response } = await newRecipeImageRequest(userContext.token, img);
+    if (!error) postRecipeData(formData, response.data);
+    else postRecipeData(formData, null);
+  };
+
+  // Called by react-hook-form on submit. formData is given when
+  // called, and is the state of all inputs
+  const onFormSubmit = (formData) => {
     if (ingredientsError || markdownError || imageError) {
+      // TODO: give feedback that you cannot submit when there is an error
       return;
     }
 
-    // Form containing image file
-    const formData = new FormData();
-    formData.append('file', imageData);
-    // Post image to public folder of the server
-
-    axios({
-      method: 'post',
-      url: 'http://localhost:8000/imageUpload',
-      data: formData,
-      headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${userContext.token}` },
-    })
-      .then((response) => {
-        // handle success
-        console.log(response);
-        const imagePath = response.data;
-        submitMainData(refData, imagePath);
-      })
-      .catch((response) => {
-        // handle error
-        console.log(response);
-        submitMainData(refData, null);
-      });
+    handlePostRecipe(image, formData);
   };
   // On UseForm errors
   const onErrors = (error) => console.error(error);
 
-  const getMarkdownData = (data) => {
-    setMarkdownData(data);
-  };
-
-  const getIngredientsData = (data) => {
-    setIngredientsData(data);
-  };
-
-  const getImageData = (data) => {
-    setImageData(data);
-  };
+  // === ERROR HANDLING
+  useErrorOnEmpty(markdownData, setMarkdownError);
+  useErrorOnEmpty(ingredientsData, setIngredientsError);
+  useErrorOnEmpty(image, setImageError);
 
   return (
     <AuthWrapper>
@@ -133,48 +85,28 @@ export default function Create() {
         <div className="centeredPageWrapper">
           <Header title="Create recipe" />
           <form className="recipeCreator" onSubmit={handleSubmit(onFormSubmit, onErrors)}>
-            <RecipeImageInput passData={getImageData} />
+            <RecipeImageInput image={image} setImage={setImage} />
             <div className={styles.timeTitleContainer}>
               <RecipeTitleInput register={register} />
               <RecipeTimeInput register={register} />
             </div>
             <RecipeDescriptionInput register={register} />
-            <RecipeIngredientsInput passData={getIngredientsData} />
-            <RecipeStepsMarkdown register={register} passData={getMarkdownData} />
-            <div className={styles.errorMessgeContainer}>
-
-              {(imageError
-              && (
-                <div className={styles.errorMessage}>
-                  Please upload an image with your recipe.
-                </div>
-              ))}
-              {(errors.title
-              && (
-                <div className={styles.errorMessage}>
-                  Please give your recipe a title. Cannot exceed 40 characters
-                </div>
-              ))}
-              {(errors.description && (
-              <div className={styles.errorMessage}>
-                Please give your recipe a description. Cannot exceed 200 characters.
-              </div>
-              ))}
-              {(ingredientsError
-              && (
-                <div className={styles.errorMessage}>
-                  Please provide one or more ingredients with your recipe.
-                </div>
-              )
-            )}
-              {(markdownError
-              && (
-                <div className={styles.errorMessage}>
-                  Please provide recipe steps. Cannot exceed 4000 characters.
-                </div>
-              )
-            )}
-            </div>
+            <RecipeIngredientsInput
+              ingredients={ingredientsData}
+              setIngredients={setIngredientsData}
+            />
+            <RecipeStepsMarkdown
+              register={register}
+              value={markdownData}
+              setValue={setMarkdownData}
+            />
+            <RecipeFormErrors
+              errors={errors}
+              imageError={imageError}
+              ingredientsError={ingredientsError}
+              markdownError={markdownError}
+              serverError={serverError}
+            />
             <button type="submit" value="Submit" className={styles.submitButton}>Submit</button>
           </form>
         </div>

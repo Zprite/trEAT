@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import styles from '../styles/RecipeStepsMarkdown.module.css';
 
-export default function RecipeStepsMarkdown({ passData }) {
-  const [value, setValue] = React.useState('# Recipe!');
-  useEffect(() => {
-    passData(value);
-  }, [value]);
+export default function RecipeStepsMarkdown({ value, setValue }) {
   return (
     <div className={styles.RecipeStepsMarkdown}>
       <h2>Recipe Steps</h2>

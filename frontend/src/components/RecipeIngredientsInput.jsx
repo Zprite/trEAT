@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/RecipeIngredientsInput.module.css';
 
-export default function RecipeIngredientsInput({ passData }) {
-  const [ingredients, setIngredients] = useState([]);
+export default function RecipeIngredientsInput({ ingredients, setIngredients }) {
   const [name, setName] = useState('');
   const [ingredientId, setIngredientId] = useState(0);
 
@@ -30,10 +29,6 @@ export default function RecipeIngredientsInput({ passData }) {
     }
     setName(event.target.value);
   }
-
-  useEffect(() => {
-    passData(ingredients);
-  }, [ingredients]);
 
   return (
     <div className={styles.RecipeIngredientsInput}>
