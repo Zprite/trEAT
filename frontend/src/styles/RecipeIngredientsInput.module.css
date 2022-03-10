@@ -1,5 +1,4 @@
 .RecipeIngredientsInput{
-    background-color: #fff;
     padding-left: 0px;
     padding-bottom: 24px;
     display: flex;
@@ -23,7 +22,6 @@
     flex-direction: column;
     justify-content: center;
     width: 80%;
-    background-color: #fff;
     align-items: center;
     margin-bottom: 0px;
 } 

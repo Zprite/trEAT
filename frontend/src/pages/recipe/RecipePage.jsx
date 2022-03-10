@@ -53,7 +53,7 @@ export default function RecipePage() {
             className={styles.recipeImage}
           />
           <div className={cn('recipeContainer', 'background')}>
-            <div className={styles.ingredientsContainer}>
+            <div className={cn(styles.ingredientsContainer, 'white')}>
               <h2 className={styles.ingredientsHeader}>Ingredients</h2>
               <IngredientsView recipeObject={recipeData} />
             </div>
