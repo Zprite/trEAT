@@ -34,7 +34,7 @@
 }
 
 .submitButton:hover{ 
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(139, 138, 138);
     border: 2px solid rgb(148, 148, 148);
     font-size: 1.4rem;
     border-radius: 3PX;
