@@ -72,6 +72,9 @@ export default function RecipeView() {
           {error && (
             <div>{`Error fetching recipes:  ${error}`}</div>
           )}
+          {filteredRecipes && !filteredRecipes.length && (
+            <div>No recipes matched your search</div>
+          )}
           {filteredRecipes && filteredRecipes.map((recipe) => (
             <RecipeThumbnail
               key={recipe._id}
