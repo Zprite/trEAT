@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import cn from 'classnames';
