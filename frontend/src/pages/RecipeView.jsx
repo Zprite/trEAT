@@ -45,6 +45,13 @@ export default function RecipeView() {
                 newFilteredRecipes.push(recipeData[i]);
                 return true;
               }
+            } else if (key === 'ingredients') {
+              for (let j = 0; j < value.length; j += 1) {
+                if (value[j].name.toLowerCase().includes(searchWord.toLowerCase())) {
+                  newFilteredRecipes.push(recipeData[i]);
+                  return true;
+                }
+              }
             }
             return false;
           });
@@ -65,10 +72,10 @@ export default function RecipeView() {
     <div>
       <NavBar />
       <div className={styles.outerContainer}>
+        <UserCredentialsView />
+        <SearchBar setSearchWord={setSearchWord} />
+        {loading && <div>Loading recipes...</div>}
         <div className={styles.recipeContainer}>
-          <UserCredentialsView />
-          <SearchBar setSearchWord={setSearchWord} />
-          {loading && <div>Loading recipes...</div>}
           {error && (
             <div>{`Error fetching recipes:  ${error}`}</div>
           )}
