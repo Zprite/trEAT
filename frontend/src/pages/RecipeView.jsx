@@ -15,57 +15,59 @@ export default function RecipeView() {
   const [searchWord, setSearchWord] = useState(null);
   const [filteredRecipes, setFilteredRecipes] = useState(null);
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await axios.get(
-          'http://localhost:8000/recipes',
-        );
-        setRecipeData(response.data);
-        setFilteredRecipes(response.data);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-        setRecipeData(null);
-      } finally {
-        setLoading(false);
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:8000/recipes',
+      );
+      setRecipeData(response.data);
+      setFilteredRecipes(response.data);
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+      setRecipeData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filterData = async () => {
+    try {
+      const newFilteredRecipes = [];
+      for (let i = 0; i < recipeData.length; i += 1) {
+        Object.entries(recipeData[i]).some((keyVal) => {
+          const [key, value] = keyVal;
+          if (key === 'title' || key === 'description') {
+            if (value.toLowerCase().includes(searchWord.toLowerCase())) {
+              newFilteredRecipes.push(recipeData[i]);
+              return true;
+            }
+          } else if (key === 'ingredients') {
+            for (let j = 0; j < value.length; j += 1) {
+              if (value[j].name.toLowerCase().includes(searchWord.toLowerCase())) {
+                newFilteredRecipes.push(recipeData[i]);
+                return true;
+              }
+            }
+          }
+          return false;
+        });
       }
-    };
+      setFilteredRecipes(newFilteredRecipes);
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+      setRecipeData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     getData();
   }, []);
 
   useEffect(() => {
-    const filterData = async () => {
-      try {
-        const newFilteredRecipes = [];
-        for (let i = 0; i < recipeData.length; i += 1) {
-          Object.entries(recipeData[i]).some((keyVal) => {
-            const [key, value] = keyVal;
-            if (key === 'title' || key === 'description') {
-              if (value.toLowerCase().includes(searchWord.toLowerCase())) {
-                newFilteredRecipes.push(recipeData[i]);
-                return true;
-              }
-            } else if (key === 'ingredients') {
-              for (let j = 0; j < value.length; j += 1) {
-                if (value[j].name.toLowerCase().includes(searchWord.toLowerCase())) {
-                  newFilteredRecipes.push(recipeData[i]);
-                  return true;
-                }
-              }
-            }
-            return false;
-          });
-        }
-        setFilteredRecipes(newFilteredRecipes);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-        setRecipeData(null);
-      } finally {
-        setLoading(false);
-      }
-    };
     filterData();
   }, [searchWord]);
 
