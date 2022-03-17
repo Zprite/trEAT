@@ -22,6 +22,7 @@
 /* Small devices (landsscape phones) standard */
 /* Medium devices (tablets) */
 .recipeContainer {
+    // 100vw gives horizontal scrollbar
     min-width: 98.7vw;        
     display: flex;
     justify-content: center;
