@@ -63,3 +63,44 @@ Sette opp koblingen mellom bruker og oppskrifter i backend.
 - Lag en ny oppskrift
 - Sjekk profilsiden din, og se at den nye oppskriften har dukket opp.
 - Trykk på oppskriften, og se at den laster inn siden for den.
+
+# Spring 3
+
+## Brukerhistorie 6
+### Se oppskrifter til bruker
+Som bruker ønsker jeg å kunne gå inn på en annen bruker og se alle oppskriftene vedkommende har lagt ut. På denne måten kan jeg se hvordan jeg lager det jeg fikk servert av en venn som også bruker plattformen.
+
+### Hvordan demonstrere
+- gå inn på en oppskrift fra hjemsiden
+- gå inn på profilen til den som la ut oppskriften
+- du er inne på brukeren og kan se alle oppskriftene til brukeren
+
+## Brukerhistorie 7
+### Dark Mode
+Som bruker ønsker jeg å kunne sette applikasjonen i "dark-mode", slik at jeg kan skåne øynene mine når jeg skal lage nattmat.
+
+### Hvordan demonstrere
+- toggle darkmode i navbar
+- se at fargene på nettsiden endrer seg mellom mørke og lyse farger. 
+- Endre color scheme i system setting og se at fargen på siden endrer seg. 
+- Skjekk dette for alle sider
+
+## Brukerhistorie 8
+### Redigere og slette oppskrifter
+Som bruker ønsker jeg å kunne endre teksten og bilde i en oppskrift jeg har lagt ut, hvis jeg for eksempel finner ut at ribbe også er godt om sommeren, og at den da bør grilles. Jeg vil også kunne slette mine oppskriter.
+
+### Hvordan demonstrere
+- Lag en ny oppskrift
+- Finn oppskriften i profil-siden din, og trykk på "endre oppskrift"
+- Prøv å endre bilde, ingredienser, framgangsmåte, estimert tid, kort beskrivelse og tittel. 
+
+- Gå på hjemsiden og sjekk at du ikke kan endre andre sine oppskrifter
+- Gå manuelt til en URL (for endring av oppskrifter) for en oppskrift som ikke er din og sjekk at du ikke får tilgang til å endre den
+
+## Brukerhistorie 9
+### Søke etter oppskrifter på tekst
+Som bruker ønsker jeg ulike kategorier på tekst slik at jeg lettere kan finne frem til oppskrifter av interesse.
+
+### Hvordan demonstrere
+- Lag en oppskrift
+- Søk etter noe spesifikt fra oppskriften på hjem-siden og sjekk at oppskriften kommer opp
