@@ -72,19 +72,11 @@ export default function RecipeView() {
   return (
     <div>
       <NavBar />
-<<<<<<< HEAD
-      <div className={styles.outerContainer}>
-        <UserCredentialsView />
-        <SearchBar setSearchWord={setSearchWord} />
-        {loading && <div>Loading recipes...</div>}
-        <div className={styles.recipeContainer}>
-=======
       <div className={cn(styles.outerContainer, 'background')}>
         <div className={cn('recipeContainer', 'background')}>
           <UserCredentialsView />
-          <SearchBar />
+          <SearchBar setSearchWord={setSearchWord} />
           {loading && <div>Loading recipes...</div>}
->>>>>>> 13feb83 (refactored css, added general color classes. Started with dark mode integration)
           {error && (
             <div>{`Error fetching recipes:  ${error}`}</div>
           )}
