@@ -9,12 +9,12 @@ const router = express.Router();
 // Get user credentials. 
 // Checks validity using verifyUser using JwtStrategy (gets JWT from bearer-token header) 
 router.get("/me", verifyUser, async (req, res, next) => {
-  const courses = await User
+  const user = await User
     .findOne({ _id: req.user._id })
     .populate('recipes')
 
-  res.send(courses)
-  console.log(courses)
+  res.send(user)
+  console.log(user)
 })
 
 router.post("/login", passport.authenticate('local'), (req, res, next) => {
