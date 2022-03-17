@@ -1,5 +1,4 @@
 .outerContainer {
-<<<<<<< HEAD
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -23,17 +22,6 @@
 /* Small devices (landsscape phones) standard */
 /* Medium devices (tablets) */
 .recipeContainer {
-<<<<<<< HEAD
-    // 100vw gives horizontal scrollbar
-    min-width: 98.7vw;        
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: flex-start;
-    max-width: 1600px;
-}
-=======
   /* 100vw gives horizontal scrollbar */
   min-width: 98.7vw;
   display: flex;
@@ -43,10 +31,4 @@
   align-items: flex-start;
   max-width: 1600px;
 }
->>>>>>> f8b90cb (add comment)
-=======
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
->>>>>>> 13feb83 (refactored css, added general color classes. Started with dark mode integration)
+
