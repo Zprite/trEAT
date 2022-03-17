@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cn from 'classnames';
 import styles from '../styles/RecipeIngredientsInput.module.css';
 
 export default function RecipeIngredientsInput({ ingredients, setIngredients }) {
@@ -31,9 +32,9 @@ export default function RecipeIngredientsInput({ ingredients, setIngredients }) 
   }
 
   return (
-    <div className={styles.RecipeIngredientsInput}>
+    <div className={cn(styles.RecipeIngredientsInput, 'white')}>
       <h2 className={styles.ingredientTitle}>Ingredients</h2>
-      <ul id="recipeList" className={styles.recipeList}>
+      <ul id="recipeList" className={cn(styles.recipeList, 'white')}>
         {ingredients.map((ingredient) => (
           <li className={styles.ingredientList} key={ingredient.id}>
             <button type="button" className={styles.deleteButton} id={ingredient.id} onClick={removeIngredient}>-</button>

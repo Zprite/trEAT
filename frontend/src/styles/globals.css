@@ -3,7 +3,6 @@
     box-sizing: border-box;
 }
 
-
 h1 {
     font-size: 2.5em;
     font-weight: 400;
@@ -15,12 +14,29 @@ h1 {
 p {
     margin: 0.8rem 0.8rem 1.8rem 0.8rem;
     font-size: 1.15rem;
-    color: #3b3b45;
+    color: #3b3b3b;
+    text-decoration: none; /* no underline */
     overflow: hidden;
 }
 
 img {
     object-fit: cover;
+}
+
+.background {
+    background-color: #f7f7f4;
+}
+
+.elementBackground{
+    background-color: #e3e3da;
+}
+
+.white{
+    background-color: #fff;
+}
+
+:root {
+    color-scheme: light dark;
 }
 
 .centeredPageWrapper{
@@ -78,6 +94,7 @@ body {
 .authFormInner{
     padding: 48px 100px ;
     border: 1px solid #008f67;
+    background-color: #ecebeb;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -97,6 +114,8 @@ body {
 
 .space{
     padding-left: 4px;
+    color: #008f67;
+    text-decoration-line:underline;
 }
 
 .formButton{
@@ -108,7 +127,7 @@ body {
 }
 
 .formButton:hover{ 
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(189, 187, 187);
     border: 2px solid rgb(148, 148, 148);
     border-radius: 3PX;
     cursor: pointer;
@@ -117,6 +136,7 @@ body {
 .bp3-input{
     width: 250px;
     font-size: 1.2rem;
+    background-color: #fff;
     padding: 4px;
     margin-top: 4px;
 }
@@ -131,6 +151,26 @@ body {
     margin: 0 auto;
     margin-top: 20vw;
 }
+
+.recipeContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0.6rem 0.8rem;
+}
+
+/* Small devices (landsscape phones) standard */
+/* Medium devices (tablets) */
+@media (min-width: 650px) {
+    .recipeContainer {        
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: flex-start;
+        max-width: 1600px;
+    }
+}
+/* Large divices (large desktops) */
 
 @media only screen and (max-width: 900px) {
     .centeredPageWrapper{
@@ -149,5 +189,41 @@ body {
 
     .recipeCreator{
         width: 95%;
+    }
+}
+
+.blackText{
+    color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --special-text-color: hsla(60, 50%, 70%, 0.75);
+        --border-color: rgb(230, 225, 225);
+        background-color: #252525;
+    }
+    .background{
+        background-color: #2e2e2e;
+    }
+    .elementBackground{
+        background-color: #3b3b3b;
+    }
+    p {
+        color: #e3e3da;
+    }
+    .white{
+        background-color: #3b3b3b;
+    }
+    .centeredPageWrapper, .recipePageWrapper{
+        background-color: #2e2e2e;
+    }
+    .blackText{
+        color: #fff !important;
+    }
+    .authFormInner{
+        background-color: #2e2e2e ;
+    }
+    .bp3-input{
+        background-color: #3b3b3b;
     }
 }

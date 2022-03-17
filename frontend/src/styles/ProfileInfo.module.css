@@ -5,6 +5,12 @@
     align-items: center;
 }
 
+@media (prefers-color-scheme: dark){
+    .profileContainer{
+        background-color: rgb(68, 67, 67);
+    }
+}
+
 .profileContainer img {
     width: 10rem;
     border-radius: 50%;

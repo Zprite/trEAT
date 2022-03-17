@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
+import cn from 'classnames';
 import styles from '../styles/RecipeImageInput.module.css';
 
 export default function RecipeImageInput({ image, setImage }) {
@@ -34,7 +35,7 @@ export default function RecipeImageInput({ image, setImage }) {
     <div className={styles.imageInputContainter}>
       <label htmlFor="file">
         <div
-          className={styles.labelInner}
+          className={cn(styles.labelInner, 'white')}
           style={{
             backgroundImage: `url(${imageURL})`,
             backgroundRepeat: 'no-repeat',

@@ -1,5 +1,4 @@
 .RecipeStepsMarkdown{
-    background-color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,4 +12,12 @@
     width: 95%;
     display: flex;
     background-color: rgb(238, 238, 238);
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .previewContainer{
+        background-color: rgb(46, 46, 46);
+    }
+
 }

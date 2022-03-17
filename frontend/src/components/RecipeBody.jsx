@@ -1,5 +1,6 @@
 import React, { } from 'react';
 import MarkdownPreview from '@uiw/react-markdown-preview';
+import cn from 'classnames';
 import styles from '../styles/RecipeBody.module.css';
 import IngredientsView from './IngredientsView';
 
@@ -31,7 +32,7 @@ export default function RecipeBody({ recipeObject }) {
   });
 
   const renderIngredients = () => ((dimensions.width < widthBreakpoint) ? (
-    <div className={styles.ingredientsContainer}>
+    <div className={cn(styles.ingredientsContainer, 'white')}>
       <hr />
       <h2 className={styles.ingredientsHeader}>Ingredients</h2>
       <IngredientsView recipeObject={recipeObject} />
@@ -40,7 +41,7 @@ export default function RecipeBody({ recipeObject }) {
   ) : null);
 
   return (
-    <div className={styles.recipeBodyContainer}>
+    <div className={cn(styles.recipeBodyContainer, 'white')}>
       <h1 id="recipeTitle">
         {dishTitle}
       </h1>

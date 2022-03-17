@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   Button, Callout, FormGroup, InputGroup,
 } from '@blueprintjs/core';
