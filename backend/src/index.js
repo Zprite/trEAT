@@ -45,7 +45,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 // Set public folder, mainly for image uploads
-console.log(getPublicDirPath())
+//console.log(getPublicDirPath())
 app.use(express.static(getPublicDirPath()))
 
 
