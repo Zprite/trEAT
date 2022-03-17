@@ -170,7 +170,7 @@ body {
         max-width: 1600px;
     }
 }
-/* Large divices (large desktops) */
+/* Large devices (large desktops) */
 
 @media only screen and (max-width: 900px) {
     .centeredPageWrapper{
