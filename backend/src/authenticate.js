@@ -1,7 +1,7 @@
-import passport from 'passport'
-import jwt from 'jsonwebtoken'
+import passport from 'passport';
+import jwt from 'jsonwebtoken';
 
-const dev = process.env.NODE_ENV !== "production";
+// const dev = process.env.NODE_ENV !== 'production';
 
 export const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -9,20 +9,16 @@ export const COOKIE_OPTIONS = {
   // secure cookies do not work correctly (in postman)
   secure: true,
   signed: true,
-  maxAge: eval(process.env.REFRESH_TOKEN_EXPIRY) * 1000,
-  sameSite: "none",
+  maxAge: Number(process.env.REFRESH_TOKEN_EXPIRY) * 1000,
+  sameSite: 'none',
 };
 
-export const getToken = user => {
-  return jwt.sign(user, process.env.JWT_SECRET, {
-    expiresIn: eval(process.env.SESSION_EXPIRY),
-  })
-};
+export const getToken = (user) => jwt.sign(user, process.env.JWT_SECRET, {
+  expiresIn: Number(process.env.SESSION_EXPIRY),
+});
 
-export const getRefreshToken = user => {
-  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn: eval(process.env.REFRESH_TOKEN_EXPIRY)
-  })
-}
+export const getRefreshToken = (user) => jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {
+  expiresIn: Number(process.env.REFRESH_TOKEN_EXPIRY),
+});
 
-export const verifyUser = passport.authenticate("jwt", { session: false })
+export const verifyUser = passport.authenticate('jwt', { session: false });
