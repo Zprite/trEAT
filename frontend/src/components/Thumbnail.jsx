@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { FaRegClock, FaStar, FaRegEdit } from 'react-icons/fa';
@@ -13,31 +13,44 @@ export default function Thumbnail({
   description,
   link, // 150 characters?
 }) {
+  const [isMyProfile, setIsMyProfile] = useState(false);
+
+  useEffect(() => {
+    const value = 0; // dont know how to check backend url ends in /me
+    if (value === 1) {
+      setIsMyProfile(true);
+    } else {
+      setIsMyProfile(false);
+    }
+  }, []);
+
   return (
     <div className={cn(styles.box, 'elementBackground')}>
-      <Link className={styles.link} to={link}>
-        <div id="heading">
-          <h1>{title}</h1>
-        </div>
-        <img className={styles.thumbnailImage} src={image} alt="" />
-        <div className={styles.tinyFacts}>
-          <div>
-            <div id="clock"><FaRegClock /></div>
-            <div id="duration">{duration}</div>
+      <div className={styles.separatorBox}>
+        <Link className={styles.link} to={link}>
+          <div id="heading">
+            <h1>{title}</h1>
           </div>
-          <div>
-            <div id="star"><FaStar /></div>
-            <div id="rating">{rating}</div>
+          <img className={styles.thumbnailImage} src={image} alt="" />
+          <div className={styles.tinyFacts}>
+            <div>
+              <div id="clock"><FaRegClock /></div>
+              <div id="duration">{duration}</div>
+            </div>
+            <div>
+              <div id="star"><FaStar /></div>
+              <div id="rating">{rating}</div>
+            </div>
           </div>
-        </div>
-        <p id="rating">{description}</p>
-      </Link>
-      <div className={styles.linkBox}>
-        <Link className={styles.editLink} to="/create">
-          <div className={styles.editIcon}>
-            <FaRegEdit />
-          </div>
+          <p id="rating">{description}</p>
         </Link>
+        <div className={`${isMyProfile ? styles.linkBox : styles.noLinkBox}`}>
+          <Link className={styles.editLink} to="/create">
+            <div className={styles.editIcon}>
+              <FaRegEdit />
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );
