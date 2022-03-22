@@ -12,7 +12,6 @@ router.route('/recipes').get((req, res) => {
     if (!err) {
       res.send(found);
     } else {
-      console.log(err);
       res.send("Some error occured!")
     }
   });
@@ -28,6 +27,7 @@ router.post('/recipes', verifyUser, (async (req, res, next) => {
     ingredients: body.ingredients,
     imagePath: body.imagePath,
     userID: req.user._id,
+    username: req.user.username
   });
 
   const saveRes = await recipe.save()
@@ -110,8 +110,6 @@ router.get('/recipe/:id', (async (req, res) => {
   }
 
   else if (typeof params.id != "string") {
-    console.log(typeof params.id);
-    console.log(params.id);
     getRes = { error: "ID is not of type string" };
     res.status(400);
   }

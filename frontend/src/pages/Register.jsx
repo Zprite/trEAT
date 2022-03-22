@@ -29,7 +29,7 @@ export default function Register() {
 
     axios({
       method: 'post',
-      url: 'http://localhost:8000/users/signup',
+      url: 'http://localhost:8000/auth/signup',
       headers: {
         'Content-Type': 'application/json',
       },
