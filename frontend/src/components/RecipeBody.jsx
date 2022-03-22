@@ -1,8 +1,10 @@
-import React, { } from 'react';
+import React, { useEffect } from 'react';
 import MarkdownPreview from '@uiw/react-markdown-preview';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import styles from '../styles/RecipeBody.module.css';
 import IngredientsView from './IngredientsView';
+// import { UserContext } from '../context/UserContext';
 
 export default function RecipeBody({ recipeObject }) {
   const widthBreakpoint = 900;
@@ -11,12 +13,13 @@ export default function RecipeBody({ recipeObject }) {
   const durationTime = recipeObject.duration;
   const markdownSource = recipeObject.stepsMarkdown;
 
+  // const [user] = useContext(UserContext);
   const [dimensions, setDimensions] = React.useState({
     height: window.innerHeight,
     width: window.innerWidth,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleResize() {
       setDimensions({
 
@@ -48,6 +51,11 @@ export default function RecipeBody({ recipeObject }) {
       <p className={styles.recipeDescription}>
         {descriptionText}
       </p>
+      Made by
+      {' '}
+      <Link to={`/profile/${recipeObject.username}`} className={styles.userProfileLink}>
+        {recipeObject.username}
+      </Link>
       {renderIngredients()}
       <div className={styles.timeEstimateOuter}>
         <hr className="divider" />

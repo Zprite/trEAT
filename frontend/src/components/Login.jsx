@@ -23,7 +23,7 @@ export default function Login() {
     const genericErrorMessage = 'Login failed';
     axios({
       method: 'post',
-      url: 'http://localhost:8000/users/login',
+      url: 'http://localhost:8000/auth/login',
       headers: {
         'Content-Type': 'application/json',
       },

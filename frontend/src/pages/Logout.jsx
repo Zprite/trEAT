@@ -13,7 +13,7 @@ export default function Logout() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: 'http://localhost:8000/users/logout',
+      url: 'http://localhost:8000/auth/logout',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${userContext.token}`,

@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import IngredientsView from '../../components/IngredientsView';
 import RecipeBody from '../../components/RecipeBody';
 import NavBar from '../../components/NavBar';
-import '../../styles/globals.css';
 import styles from '../../styles/recipePage.module.css';
 
 export default function RecipePage() {

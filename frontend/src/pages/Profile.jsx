@@ -15,7 +15,7 @@ export default function Profile() {
     () => {
       axios({
         method: 'get',
-        url: 'http://localhost:8000/users/me',
+        url: 'http://localhost:8000/user/me',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${userContext.token}`,

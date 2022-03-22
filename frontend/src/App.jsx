@@ -8,6 +8,7 @@ import RecipePage from './pages/recipe/RecipePage';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
 import Profile from './pages/Profile';
+import UserPage from './pages/UserPage';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -18,7 +19,7 @@ function App() {
   const verifyUser = useCallback(() => {
     axios({
       method: 'post',
-      url: 'http://localhost:8000/users/refreshToken',
+      url: 'http://localhost:8000/auth/refreshToken',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -68,6 +69,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="logout" element={<Logout />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="profile/:username" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
   );

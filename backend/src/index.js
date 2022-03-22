@@ -11,6 +11,7 @@ const app = express()
 
 // Routers
 import userRouter from "./routes/userRoutes.js"
+import authRouter from "./routes/authRoutes.js"
 import recipeRouter from "./routes/recipeRoutes.js"
 import imageRouter from "./routes/fileUploadRoutes.js"
 
@@ -51,14 +52,15 @@ app.use(express.static(getPublicDirPath()))
 
 app.use(passport.initialize())
 
-app.use("/users", userRouter)
+app.use("/auth", authRouter)
+app.use("/", userRouter)
 app.use("/", imageRouter)
 app.use("/", recipeRouter)
 
 app.get('/', function (req, res) {
-    return res.send("hello from my app express server!")
+    return res.send("This is the root of the express api. ")
 })
 
 connectToDB();
 
-const server = app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}...`))
+app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}...`))
