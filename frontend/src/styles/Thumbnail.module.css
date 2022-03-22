@@ -3,10 +3,14 @@
     padding: 1rem 0.8rem 0rem 0.8rem;
     border-color: black;
     border-radius: 2.5%;
-    justify-content: center;
     text-align: center;
-    display: inline-block; 
-    max-width: 400px !important;
+    max-width: 600px;
+    display: flex; 
+    align-items: center;
+}
+
+.separatorBox {
+width: 100%;
 }
 
 .link {
@@ -47,9 +51,12 @@
 
 .linkBox {
     display: flex;
-    display: none;
     justify-content: end;
     align-items: flex-end;
+}
+
+.noLinkBox {
+    display: none;
 }
 
 .editLink {
@@ -67,12 +74,25 @@
     .box {
         min-height: 37rem;
         align-items: center;
+        justify-content: center;
         width: 300px;
         flex-basis: 300px;
         flex-grow: 1;
-        max-width: 600px;
+        max-width: 500px;
         min-width: 300px;
     }
+
+    .separatorBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 37rem;  
+        min-width: 300px;  
+    } 
+
+    .thumbnailImage{
+    }
+
     #heading {
         display: flex;
         justify-content: center;
