@@ -44,6 +44,34 @@ router.get('/user/id/:id', verifyUser, async (req, res) => {
   res.send({ data: getRes });
 });
 
+router.delete('/user/id/:id', verifyUser, async (req, res) => {
+  const { params } = req;
+  let getRes;
+
+  if (!req.user.admin) {
+    getRes = { error: 'Unauthorized' }
+    res.status(401);
+  } else if (!(req.params.id)) {
+    getRes = { error: 'Badly formatted ID' };
+    res.status(400);
+  } else if (typeof params.id !== 'string') {
+    getRes = { error: 'ID is not of type string' };
+    res.status(400);
+  } else if (req.params.id.length !== 24) {
+    getRes = { error: 'ID is of wrong length' };
+    res.status(400);
+  } else {
+    getRes = await User.deleteOne({ _id: params.id })
+    if (getRes == null) {
+      getRes = { error: 'Recipe not found' };
+      res.status(204);
+    } else {
+      res.status(200);
+    }
+  }
+  res.send({ data: getRes });
+});
+
 router.get('/user/username/:username', verifyUser, async (req, res) => {
   const { params } = req;
   let getRes;

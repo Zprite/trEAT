@@ -8,11 +8,12 @@ import ProfileInfo from '../components/ProfileInfo';
 import styles from '../styles/profile.module.css';
 import { UserContext } from '../context/UserContext';
 import UserCredentialsView from '../components/UserCredentialsView';
+import deleteUser from '../requests/deleteUser';
 
 export default function UserPage() {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { username } = useParams();
   const [userContext] = useContext(UserContext);
 
@@ -28,56 +29,64 @@ export default function UserPage() {
           },
           withCredentials: 'include',
         });
-        console.log('Response from fetch: ', response);
-        setUserData(response.data.data);
-        setError(null);
+
+        if (response.status === 204) {
+          setError('No such user!');
+        } else {
+          setUserData(response.data.data);
+          setError(null);
+        }
       } catch (err) {
-        setError(err.message);
+        setError('An error occured connecting to the database!');
         setUserData(null);
       } finally {
         setLoading(false);
       }
     };
     getData();
-  }, [username, userContext]);
+  }, [username, userContext.token]);
 
-  useEffect(() => {
-    console.log('current userData: ', userData);
-  }, [userData]);
+  const handleDeleteUser = (token, id) => {
+    deleteUser(token, id);
+    setError('User does not exist');
+  };
 
-  console.log(userData);
   return (
     <div>
       <NavBar />
       <UserCredentialsView hidden />
       <div className={cn(styles.profileWrapper, 'background')}>
+
         {loading && <div>Loading recipes...</div>}
-        {error && (
-        <div>{`Error fetching recipes:  ${error}`}</div>
-        )}
-        <div>
-          <ProfileInfo
-            userName={username}
-            // profilePicture={}
-          />
-        </div>
-        <h2 className="blackText">Oppskrifter</h2>
-        <div className={cn('recipeContainer', 'background')}>
-          {userData && (
-            userData.recipes && userData.recipes.map((recipe) => (
-              <RecipeThumbnail
-                key={recipe._id}
-                title={recipe.title}
-                duration={`${recipe.duration} min`}
-                image={recipe.imagePath}
-                description={recipe.description}
-                rating={recipe.rating}
-                id={recipe._id}
-                userID={recipe.userID}
+        {error ? (
+          <div>{error}</div>
+        ) : (
+          <>
+            <div>
+              <ProfileInfo
+                userName={username}
               />
-            ))
-          )}
-        </div>
+              {userContext?.details?.admin && (<button type="button" onClick={() => handleDeleteUser(userContext.token, userData._id)}>Delete user</button>)}
+            </div>
+            <h2 className="blackText">Oppskrifter</h2>
+            <div className={cn('recipeContainer', 'background')}>
+              {userData && (
+                userData.recipes && userData.recipes.map((recipe) => (
+                  <RecipeThumbnail
+                    key={recipe._id}
+                    title={recipe.title}
+                    duration={`${recipe.duration} min`}
+                    image={recipe.imagePath}
+                    description={recipe.description}
+                    rating={recipe.rating}
+                    id={recipe._id}
+                    userID={recipe.userID}
+                  />
+                ))
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
