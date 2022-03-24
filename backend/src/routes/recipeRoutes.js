@@ -44,14 +44,16 @@ router.put('/recipe/:id', verifyUser, (async (req, res) => {
   const { params, body } = req;
   let putRes;
   const userID = req.user._id;
+  let adminRights = false;
+  if (req.user.admin) { adminRights = true; }
   let oldRecipe;
 
   if (!req.params.id) {
     putRes = { error: 'Badly formatted ID' };
     res.status(400);
   } else if (typeof params.id !== 'string') {
-    console.log(typeof params.id);
-    console.log(params.id);
+    // console.log(typeof params.id);
+    // console.log(params.id);
     putRes = { error: 'ID is not of type string' };
     res.status(400);
   } else if (req.params.id.length !== 24) {
@@ -62,13 +64,12 @@ router.put('/recipe/:id', verifyUser, (async (req, res) => {
     if (!oldRecipe) {
       putRes = { error: 'Recipe not found' };
       res.status(204);
-    } else if (userID.toString() !== oldRecipe.userID) {
+    } else if ((userID.toString() !== oldRecipe.userID) && !adminRights) {
       console.log('recipe UID: ', oldRecipe.userID);
       console.log('Logged in user UID: ', userID.toString());
       putRes = { error: 'Unauthorized edit request for this recipe.' };
       res.status(401);
     } else {
-
       const newRecipe = new Recipe({
         title: body.title,
         description: body.description,
@@ -76,7 +77,7 @@ router.put('/recipe/:id', verifyUser, (async (req, res) => {
         stepsMarkdown: body.stepsMarkdown,
         ingredients: body.ingredients,
         imagePath: body.imagePath,
-        userID: oldRecipe.userID
+        userID: oldRecipe.userID,
       });
 
       newRecipe._id = req.params.id;
@@ -106,8 +107,6 @@ router.get('/recipe/:id', (async (req, res) => {
     getRes = { error: 'Badly formatted ID' };
     res.status(400);
   } else if (typeof params.id !== 'string') {
-    console.log(typeof params.id);
-    console.log(params.id);
     getRes = { error: 'ID is not of type string' };
     res.status(400);
   } else if (req.params.id.length !== 24) {
@@ -140,11 +139,14 @@ router.delete('/recipe/:id', verifyUser, (async (req, res) => {
     res.status(400);
   }
   const userID = req.user._id;
+  let adminRights = false;
+  if (req.user.admin) { adminRights = true; }
+
   const recipe = await Recipe.findOne({ _id: params.id });
   if (recipe == null) {
     saveRes = { error: 'Recipe not found' };
     res.status(204);
-  } else if (userID.toString() !== recipe.userID) {
+  } else if (userID.toString() !== recipe.userID && !adminRights) {
     console.log('recipe UID: ', recipe.userID);
     console.log('Logged in user UID: ', userID);
     saveRes = { error: 'Unauthorized delete request for this recipe.' };

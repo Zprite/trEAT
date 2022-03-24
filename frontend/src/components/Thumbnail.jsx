@@ -18,7 +18,7 @@ export default function Thumbnail({
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [userContext] = useContext(UserContext);
   useEffect(() => {
-    if (userContext.details && userID === userContext.details._id) {
+    if (userContext.details && (userID === userContext.details._id || userContext.details.admin)) {
       setIsMyProfile(true);
     } else {
       setIsMyProfile(false);

@@ -30,6 +30,10 @@ const userSchema = new Schema({
   refreshToken: {
     type: [Session],
   },
+  admin: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // Remove refreshToken from the response
