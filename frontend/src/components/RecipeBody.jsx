@@ -51,11 +51,12 @@ export default function RecipeBody({ recipeObject }) {
       <p className={styles.recipeDescription}>
         {descriptionText}
       </p>
-      Made by
-      {' '}
-      <Link to={`/profile/${recipeObject.username}`} className={styles.userProfileLink}>
-        {recipeObject.username}
-      </Link>
+      <div className={styles.madeByContainer}>
+        <div>Laget av:</div>
+        <Link to={`/profile/${recipeObject.username}`} className={styles.userProfileLink}>
+          {recipeObject.username}
+        </Link>
+      </div>
       {renderIngredients()}
       <div className={styles.timeEstimateOuter}>
         <hr className="divider" />

@@ -51,7 +51,7 @@ img {
 }
 
 .recipePageWrapper {
-  width: 90%;
+  width: 75%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -193,6 +193,7 @@ body {
   .recipePageWrapper {
     width: 99%;
     margin: 0px;
+    padding: 2px;
   }
 
   .w-md-editor-toolbar {

@@ -33,6 +33,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 12px;
+    text-align: center;
 }
 
 .timeEstimateOuter{
@@ -51,13 +52,26 @@
     display: flex;
     flex-direction: row;
     padding: 12px;
+    justify-content: center;
+    align-items: center;
 }
 
 .timeEstimateText{
     padding-left: 12px;
     font-weight: lighter;
+    font-size: 1.5rem;
 }
 
+.madeByContainer{
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+    margin-top: 24px;
+}
+.madeByContainer > div{
+    margin-right: 8px;
+}
 .recipeMarkdown{
     margin-top: 32px;
     display: flex;
@@ -66,9 +80,22 @@
     align-items: center;
 }
 
+.recipeMarkdown, .recipeDescription{
+    max-width: 700px;
+    font-size: 1.2rem;
+    font-weight: 350;
+}
+
+
 @media only screen and (max-width: 900px) {
     .recipeBodyContainer{
         width: 100%;
         padding: 12px;
     }
+
+    .recipeMarkdown, .recipeDescription{
+    max-width: 500px;
+    font-weight: 350;
+    padding: 24px;
+}
 }
