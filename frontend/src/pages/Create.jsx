@@ -49,7 +49,8 @@ export default function Create({ editMode }) {
 
   const verifyUser = () => {
     if (userContext.details && oldRecipe) {
-      setUserIsAuthorized(userContext.details._id === oldRecipe.userID);
+      setUserIsAuthorized(userContext.details._id === oldRecipe.userID
+         || userContext.details.admin);
     }
   };
 
