@@ -5,7 +5,7 @@ import cn from 'classnames';
 import RecipeThumbnail from '../components/Thumbnail';
 import SearchBar from '../components/SearchBar';
 import NavBar from '../components/NavBar';
-import styles from '../styles/recipeOverview.module.css';
+import styles from '../styles/recipeView.module.css';
 import UserCredentialsView from '../components/UserCredentialsView';
 
 export default function RecipeView() {
@@ -75,7 +75,7 @@ export default function RecipeView() {
     <div>
       <NavBar />
       <div className={cn(styles.outerContainer, 'background')}>
-        <div className={cn('recipeContainer', 'background')}>
+        <div className={cn(styles.recipeContainer, 'background')}>
           <UserCredentialsView />
           <SearchBar setSearchWord={setSearchWord} />
           {loading && <div>Loading recipes...</div>}

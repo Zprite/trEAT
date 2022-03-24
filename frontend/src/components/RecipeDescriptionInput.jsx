@@ -7,7 +7,7 @@ export default function RecipeDescriptionInput({ register }) {
   return (
     <div className={cn(styles.RecipeDescriptionInput, 'white')}>
       <h2>Short Description</h2>
-      <textarea id="descTextArea" name="description" {...register('description', { required: true, maxLength: 200 })} rows="4" cols="50" placeholder="Write a short description of your dish..." />
+      <textarea id="descTextArea" className={styles.descTextArea} name="description" {...register('description', { required: true, maxLength: 200 })} rows="4" cols="50" placeholder="Write a short description of your dish..." />
     </div>
   );
 }

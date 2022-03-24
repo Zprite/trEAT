@@ -34,18 +34,28 @@ export default function RecipeIngredientsInput({ ingredients, setIngredients }) 
 
   return (
     <div className={cn(styles.RecipeIngredientsInput, 'white')}>
-      <h2 className={styles.ingredientTitle}>Ingredients</h2>
-      <ul id="recipeList" className={cn(styles.recipeList, 'white')}>
-        {ingredients.map((ingredient) => (
-          <li className={styles.ingredientList} key={ingredient._id}>
-            <button type="button" className={styles.deleteButton} id={ingredient._id} onClick={removeIngredient}>-</button>
-            {ingredient.name}
-          </li>
-        ))}
-      </ul>
-      <div>
-        <button type="button" className={styles.addButton} onClick={handleAdd}>+</button>
-        <input type="text" value={name} className={styles.entryContainer} id="newIngredientSubmission" onChange={handleChange} onKeyPress={handleChange} />
+      <div className={cn(styles.listContainer)}>
+        <h2 className={styles.ingredientTitle}>Ingredients</h2>
+        <ul id="recipeList" className={cn(styles.recipeList, 'white')}>
+          {ingredients.map((ingredient) => (
+            <li className={styles.ingredientList} key={ingredient._id}>
+              <button type="button" className={styles.deleteButton} id={ingredient._id} onClick={removeIngredient}>-</button>
+              {ingredient.name}
+            </li>
+          ))}
+        </ul>
+        <div className={styles.addEntryContainer}>
+          <button type="button" className={styles.addButton} onClick={handleAdd}>+</button>
+          <input
+            placeholder="Legg til ingrediens"
+            type="text"
+            value={name}
+            className={styles.input}
+            id="newIngredientSubmission"
+            onChange={handleChange}
+            onKeyPress={handleChange}
+          />
+        </div>
       </div>
     </div>
   );

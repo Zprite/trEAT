@@ -1,16 +1,15 @@
-
-#timeSelect{
-    width: 100px;
-    padding: 10px;
-    padding-left: 32px;
+#timeSelect {
+  width: 100px;
+  padding: 10px;
+  padding-left: 32px;
 }
 
-.icon{
-    position: absolute;
-    margin-top: 9px;
-    margin-left: 7px;
+.icon {
+  position: absolute;
+  margin-top: 9px;
+  margin-left: 7px;
+  z-index: 0;
 }
 
 @media only screen and (max-width: 488px) {
-
 }

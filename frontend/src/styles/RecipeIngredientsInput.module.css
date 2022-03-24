@@ -14,8 +14,8 @@
     justify-content: flex-start;
     padding-left: 0px;
     padding-top: 0px;
-    width: 60%;
 }
+
 
 .ingredientTitle{
     display: flex;
@@ -29,39 +29,49 @@
     list-style-type: none;
     padding-top: 12px;
     padding-bottom: 8px;
-    padding-left: 0px;
-
+    width: 100%;
 }
 
-.deleteButton{
+.addButton, .deleteButton{
     margin: 0;
     padding: 0;
-    font-size: 15px;
-    border: 2px solid black;
+    font-size: 1rem;
+    border: 1px solid rgb(58, 58, 58);
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    font-family: arial;
+    width: 28px;
+    height: 28px;
+    font-weight: 500;
     margin-right: 10px;
 }
+
 .deleteButton:hover{
     background-color: rgb(243, 79, 79);
-    font-size: 1.4rem;
-}
-
-.addButton{
-    margin: 0;
-    padding: 0;
-    font-size: 15px;
-    border: 2px solid black;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    font-family: arial;
-    margin-right: 10px;
 }
 
 .addButton:hover{
     background-color: rgb(0, 190, 143);
-    font-size: 1.4rem;
+}
+
+.input{
+    margin-left: 2px;
+    height: 28px;
+}
+
+.listContainer{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 400px){
+    .listContainer{
+    width: 220px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .addButton, .deleteButton{
+        border: 1px solid rgb(194, 194, 194);
+    }
 }

@@ -6,6 +6,7 @@
     align-items: center;
     padding-bottom: 24px;
 }
-textarea{
+
+.descTextArea{
     max-width: 80%;
 }
