@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import cn from 'classnames';
 import NavBar from '../components/NavBar';
 import RecipeThumbnail from '../components/Thumbnail';
 import ProfileInfo from '../components/ProfileInfo';
@@ -38,7 +39,7 @@ export default function UserPage() {
       }
     };
     getData();
-  }, [username]);
+  }, [username, userContext]);
 
   useEffect(() => {
     console.log('current userData: ', userData);
@@ -49,7 +50,7 @@ export default function UserPage() {
     <div>
       <NavBar />
       <UserCredentialsView hidden />
-      <div className={styles.profileWrapper}>
+      <div className={cn(styles.profileWrapper, 'background')}>
         {loading && <div>Loading recipes...</div>}
         {error && (
         <div>{`Error fetching recipes:  ${error}`}</div>
@@ -60,8 +61,8 @@ export default function UserPage() {
             // profilePicture={}
           />
         </div>
-        <h2>Oppskrifter</h2>
-        <div className={styles.recipeContainer}>
+        <h2 className="blackText">Oppskrifter</h2>
+        <div className={cn('recipeContainer', 'background')}>
           {userData && (
             userData.recipes && userData.recipes.map((recipe) => (
               <RecipeThumbnail
