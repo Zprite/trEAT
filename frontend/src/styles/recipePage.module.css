@@ -3,6 +3,7 @@
     height: 40%;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
+    max-height: 800px;
 }
 
 .ingredientsHeader{
