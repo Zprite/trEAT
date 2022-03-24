@@ -93,7 +93,8 @@ export default function RecipeView() {
               image={recipe.imagePath}
               description={recipe.description}
               rating={recipe.rating}
-              link={`/recipe/${recipe._id}`}
+              id={recipe._id}
+              userID={recipe.userID}
             />
           ))}
         </div>

@@ -32,15 +32,25 @@
     margin-top: 24px;
     margin-bottom: 32px;
 }
+.deleteButton{
+    color: red;
+    border-color: red;
+}
+
+.deleteButton:hover{ 
+    background-color: rgb(255, 100, 100);
+    color: #fff;
+    transition: 0.1s;
+    border: 2px solid red;
+
+}
 
 .submitButton:hover{ 
-    background-color: rgb(139, 138, 138);
     border: 2px solid rgb(148, 148, 148);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     border-radius: 3PX;
     cursor: pointer;
 }
-
 
 @media only screen and (max-width: 600px) {
     .timeTitleContainer{
