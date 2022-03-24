@@ -6,13 +6,14 @@ import RecipeThumbnail from '../components/Thumbnail';
 import ProfileInfo from '../components/ProfileInfo';
 import styles from '../styles/profile.module.css';
 import { UserContext } from '../context/UserContext';
+import UserCredentialsView from '../components/UserCredentialsView';
 
 export default function UserPage() {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
   const { username } = useParams();
-  const [user] = useContext(UserContext);
+  const [userContext] = useContext(UserContext);
 
   useEffect(() => {
     const getData = async () => {
@@ -22,7 +23,7 @@ export default function UserPage() {
           url: `http://localhost:8000/user/username/${username}`,
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${userContext.token}`,
           },
           withCredentials: 'include',
         });
@@ -47,6 +48,7 @@ export default function UserPage() {
   return (
     <div>
       <NavBar />
+      <UserCredentialsView hidden />
       <div className={styles.profileWrapper}>
         {loading && <div>Loading recipes...</div>}
         {error && (
@@ -69,7 +71,8 @@ export default function UserPage() {
                 image={recipe.imagePath}
                 description={recipe.description}
                 rating={recipe.rating}
-                link={`/recipe/${recipe._id}`}
+                id={recipe._id}
+                userID={recipe.userID}
               />
             ))
           )}

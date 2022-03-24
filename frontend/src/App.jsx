@@ -28,7 +28,10 @@ function App() {
       .then((response) => {
       // handle success
         console.log('Fetch refreshtoken success', response);
-        setUserContext((oldValues) => ({ ...oldValues, token: response.data.token }));
+        setUserContext((oldValues) => ({
+          ...oldValues,
+          token: response.data.token,
+        }));
       })
       .catch((response) => {
       // handle error
@@ -66,6 +69,7 @@ function App() {
         <Route path="create" element={<Create />} />
         <Route path="recipePage" element={<RecipePage />} />
         <Route path="recipe/:id" element={<RecipePage />} />
+        <Route path="recipe/:id/edit" element={<Create editMode />} />
         <Route path="register" element={<Register />} />
         <Route path="logout" element={<Logout />} />
         <Route path="profile" element={<Profile />} />

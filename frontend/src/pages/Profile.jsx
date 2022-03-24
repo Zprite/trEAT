@@ -7,6 +7,7 @@ import RecipeThumbnail from '../components/Thumbnail';
 import ProfileInfo from '../components/ProfileInfo';
 import styles from '../styles/profile.module.css';
 import { UserContext } from '../context/UserContext';
+import UserCredentialsView from '../components/UserCredentialsView';
 
 export default function Profile() {
   const [userContext, setUserContext] = useContext(UserContext);
@@ -53,6 +54,7 @@ export default function Profile() {
     !userContext.details ? (
       <div>Loading Recipes</div>) : (
         <div>
+          <UserCredentialsView hidden />
           <NavBar />
           <div className={cn(styles.profileWrapper, 'background')}>
             <div>
@@ -71,7 +73,8 @@ export default function Profile() {
                   image={recipe.imagePath}
                   description={recipe.description}
                   rating={recipe.rating}
-                  link={`/recipe/${recipe._id}`}
+                  id={recipe._id}
+                  userID={recipe.userID}
                 />
               ))}
             </div>

@@ -62,12 +62,13 @@ router.put('/recipe/:id', verifyUser, (async (req, res) => {
     if (!oldRecipe) {
       putRes = { error: 'Recipe not found' };
       res.status(204);
-    } else if (userID !== oldRecipe.userID) {
+    } else if (userID.toString() !== oldRecipe.userID) {
       console.log('recipe UID: ', oldRecipe.userID);
-      console.log('Logged in user UID: ', userID);
+      console.log('Logged in user UID: ', userID.toString());
       putRes = { error: 'Unauthorized edit request for this recipe.' };
       res.status(401);
     } else {
+
       const newRecipe = new Recipe({
         title: body.title,
         description: body.description,
@@ -75,10 +76,10 @@ router.put('/recipe/:id', verifyUser, (async (req, res) => {
         stepsMarkdown: body.stepsMarkdown,
         ingredients: body.ingredients,
         imagePath: body.imagePath,
-        userID: req.user._id,
+        userID: oldRecipe.userID
       });
+
       newRecipe._id = req.params.id;
-      console.log('new recipe: ', newRecipe);
 
       await Recipe.findByIdAndUpdate({ _id: params.id }, newRecipe).exec();
       // Delete old image if it gets changed.
@@ -143,7 +144,7 @@ router.delete('/recipe/:id', verifyUser, (async (req, res) => {
   if (recipe == null) {
     saveRes = { error: 'Recipe not found' };
     res.status(204);
-  } else if (userID !== recipe.userID) {
+  } else if (userID.toString() !== recipe.userID) {
     console.log('recipe UID: ', recipe.userID);
     console.log('Logged in user UID: ', userID);
     saveRes = { error: 'Unauthorized delete request for this recipe.' };

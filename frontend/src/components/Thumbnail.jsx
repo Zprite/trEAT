@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { FaRegClock, FaStar, FaRegEdit } from 'react-icons/fa';
 import styles from '../styles/Thumbnail.module.css';
+import { UserContext } from '../context/UserContext';
 
 export default function Thumbnail({
   // put in character limits for heading and description
@@ -11,23 +12,23 @@ export default function Thumbnail({
   duration,
   rating,
   description,
-  link, // 150 characters?
+  id,
+  userID,
 }) {
   const [isMyProfile, setIsMyProfile] = useState(false);
-
+  const [userContext] = useContext(UserContext);
   useEffect(() => {
-    const value = 0; // dont know how to check backend url ends in /me
-    if (value === 1) {
+    if (userContext.details && userID === userContext.details._id) {
       setIsMyProfile(true);
     } else {
       setIsMyProfile(false);
     }
-  }, []);
+  }, [userID, userContext]);
 
   return (
     <div className={cn(styles.box, 'elementBackground')}>
       <div className={styles.separatorBox}>
-        <Link className={styles.link} to={link}>
+        <Link className={styles.link} to={`/recipe/${id}`}>
           <div id="heading">
             <h1>{title}</h1>
           </div>
@@ -45,7 +46,7 @@ export default function Thumbnail({
           <p id="rating">{description}</p>
         </Link>
         <div className={`${isMyProfile ? styles.linkBox : styles.noLinkBox}`}>
-          <Link className={styles.editLink} to="/create">
+          <Link className={styles.editLink} to={`/recipe/${id}/edit`}>
             <div className={styles.editIcon}>
               <FaRegEdit />
             </div>

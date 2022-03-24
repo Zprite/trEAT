@@ -3,7 +3,7 @@ import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import styles from '../styles/recipeOverview.module.css';
 
-export default function UserCredentialsView() {
+export default function UserCredentialsView({ hidden }) {
   const [userContext, setUserContext] = useContext(UserContext);
   const DEBUG = false;
 
@@ -46,14 +46,17 @@ export default function UserCredentialsView() {
   }, [userContext.details, fetchUserDetails]);
 
   return (
-    !userContext.details ? (
-      <div>Loading Credentials</div>
-    ) : (
-      <div className={styles.userInfo}>
-        <h2 className={styles.usernameTitle}>{`Welcome ${userContext.details.fullName}`}</h2>
-        <h3>{`Username: ${userContext.details.username}`}</h3>
-        {DEBUG && <h4>{`UserID: ${userContext.details._id}`}</h4>}
-      </div>
-    )
+    <>
+      {!userContext.details && !hidden
+      && (<div>Loading Credentials</div>)}
+
+      {userContext.details && !hidden && (
+        <div className={styles.userInfo}>
+          <h2 className={styles.usernameTitle}>{`Welcome ${userContext.details.fullName}`}</h2>
+          <h3>{`Username: ${userContext.details.username}`}</h3>
+          {DEBUG && <h4>{`UserID: ${userContext.details._id}`}</h4>}
+        </div>
+      )}
+    </>
   );
 }
