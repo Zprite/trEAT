@@ -7,7 +7,7 @@ export default function SearchBar({ setSearchWord }) {
     <form className={styles.search}>
       <input
         type="text"
-        placeholder="Search recipes"
+        placeholder="Søk i oppskrifter..."
         name="q"
         // Debounce is used to update the search 150 ms after the last typed letter.
         // Value can be altered for faster/slower update of search

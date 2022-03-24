@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import styles from '../styles/recipeOverview.module.css';
+import styles from '../styles/recipeView.module.css';
 
 export default function UserCredentialsView({ hidden }) {
   const [userContext, setUserContext] = useContext(UserContext);
@@ -52,8 +52,8 @@ export default function UserCredentialsView({ hidden }) {
 
       {userContext.details && !hidden && (
         <div className={styles.userInfo}>
-          <h2 className={styles.usernameTitle}>{`Welcome ${userContext.details.fullName}`}</h2>
-          <h3>{`Username: ${userContext.details.username}`}</h3>
+          <h2 className={styles.usernameTitle}>{`Velkommen ${userContext.details.fullName}`}</h2>
+          {DEBUG && <h3>{`Username: ${userContext.details.username}`}</h3>}
           {DEBUG && <h4>{`UserID: ${userContext.details._id}`}</h4>}
         </div>
       )}

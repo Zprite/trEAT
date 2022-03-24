@@ -7,20 +7,24 @@
     margin: 0.2rem 0 0 0;
     justify-content: center;
     align-items: center;
+    margin-bottom: 24px;
+
 }
 
 .search input {
     display: inline-block;
     font-size: 1.7rem;
-    border-radius: 0.4em;
+    border-radius: 1%;
     padding: 0.21em 1rem;
     margin: 0.15em; 
     width: 75%;
+    text-align: center;
+    border: 1px solid rgb(109, 108, 108);
 }
 
 .search button {
     font-size: 1.6rem;
-    border-radius: 0.55em;
+    border-radius: 3%;
     border-color: gray;
     border-width: 2px;
     border-style: solid;

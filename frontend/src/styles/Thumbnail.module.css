@@ -1,12 +1,16 @@
 .box {
     margin: 0.6rem 0.6rem 1rem 0.6rem;
-    padding: 1rem 0.8rem 0rem 0.8rem;
     border-color: black;
-    border-radius: 2.5%;
+    border-radius: 1%;
     text-align: center;
-    max-width: 600px;
+    width: 350px;
+    height: 600px;
     display: flex; 
     align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 
 .separatorBox {
@@ -20,19 +24,29 @@ width: 100%;
 .thumbnailImage{
     width: 100%;
     height: 15rem;
-    border-radius: 3% ;
+    border-radius: 1% ;
+    transition: ease-out 0.15s;
+}
 
+.thumbnailImage:hover{
+    transform: scale(1.04);
+    transition: ease-out 0.15s;
+}
+
+.factsContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .tinyFacts {
-    color: #008f67;;
+    color: #00b27f;
     font-size: 1.5rem;
     font-weight: 300;
     margin: 0.3rem 0rem;
     padding: 0 0.4em;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+
 }
 
 .tinyFacts div{
@@ -41,10 +55,16 @@ width: 100%;
 
 .tinyFacts div div{
     margin: 0.2;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
 }
 
  #clock, #star {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position:relative;
     top: 3px;
 }
@@ -53,6 +73,10 @@ width: 100%;
     display: flex;
     justify-content: end;
     align-items: flex-end;
+    width: 100%;
+    margin-bottom: 8px;
+    margin-right: 12px;
+    padding-right: 8px;
 }
 
 .noLinkBox {
@@ -64,18 +88,36 @@ width: 100%;
 }
 
 .editIcon {
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: #008f67;
+}
+
+.editIcon:hover{
+    color: #01b985;
+}
+
+.thumbnailTitle{
+    font-size: 2rem;
+}
+
+.thumbnailTitle:hover{
+    color: #00db9d;
+}
+
+.description{
+    max-height: 200px;
+    margin-bottom: 0px;
+    overflow: hidden;
 }
 
 /* Small devices (landsscape phones) standard */
 /* Medium devices (tablets) */
-@media (min-width: 650px) {
+@media (max-width: 650px) {
     .box {
         min-height: 37rem;
         align-items: center;
         justify-content: center;
-        width: 300px;
+        width: 400px;
         flex-basis: 300px;
         flex-grow: 1;
         max-width: 500px;
@@ -90,8 +132,7 @@ width: 100%;
         min-width: 300px;  
     } 
 
-    .thumbnailImage{
-    }
+
 
     #heading {
         display: flex;
@@ -103,5 +144,16 @@ width: 100%;
     h1 {
         font-size: 2em;
     }
+}
 
+@media (max-width: 400px) {
+    .box{
+        width: 95%;
+        padding: 12px;
+        margin: 12px auto;
+    }
+    .thumbnailImage{
+        padding: 2px;
+    }
+    
 }
