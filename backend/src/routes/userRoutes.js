@@ -49,7 +49,7 @@ router.delete('/user/id/:id', verifyUser, async (req, res) => {
   let getRes;
 
   if (!req.user.admin) {
-    getRes = { error: 'Unauthorized' }
+    getRes = { error: 'Unauthorized' };
     res.status(401);
   } else if (!(req.params.id)) {
     getRes = { error: 'Badly formatted ID' };
@@ -61,7 +61,7 @@ router.delete('/user/id/:id', verifyUser, async (req, res) => {
     getRes = { error: 'ID is of wrong length' };
     res.status(400);
   } else {
-    getRes = await User.deleteOne({ _id: params.id })
+    getRes = await User.deleteOne({ _id: params.id });
     if (getRes == null) {
       getRes = { error: 'Recipe not found' };
       res.status(204);
